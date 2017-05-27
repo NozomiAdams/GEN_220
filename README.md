@@ -1,2 +1,2 @@
 # GEN_220
-For class
+This will be the repository for class 2017
