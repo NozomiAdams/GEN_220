@@ -1,2 +1,142 @@
 #Project will be for Lobaria pulmonaria 
 
+Lobaria pulmonaria & Symbiochloris reticulata  http://genome.jgi.doe.gov/Dicre1/Dicre1.home.html
+
+Being the textbook example for mutualistic symbioses, lichens represent an association of a fungus - usually an ascomycete - with one or several photosynthetic partners, the photobionts. Photobionts can be green algae or cyanobacteria. In lung lichen (Lobaria pulmonaria), the primary photobiont is the green alga Symbiochloris reticulata, but the lichens also contain Nostoc cyanobacteria in internal structures called cephalodia. These internal cyanobacteria fix atmospheric nitrogen, thus contributing to lichen growth and to the ecosystem nitrogen balance. Some consider today's populations of L. pulmonaria to be relicts of a time when the species was very abundant in the far moister Tertiary climate. The lichen species is threatened and continuously declining because of complex interactions between the lichen's spatial distribution, abundance and genetic diversity of populations, and the type, spatial extent, frequency and severity of disturbance of the lichen habitat i.e. natural and managed forests (Scheidegger & Werth 2009).
+     Lobaria pulmonaria's green-algal photobiont Symbiochloris reticulata has a spherical chloroplast located close to the cell wall (parietal), forming an intricate, net-like, structure (Škaloud et al. 2016); this chloroplast shape also explains the species' name ("reticulata" meaning net-shaped). Asexual reproduction occurs by 4-8(-16) autospores, stages of sexual reproduction are so far unknown. The majority of lichen photobionts including S. reticulata belongs to the class Trebouxiophyceae, and this green alga teams up with the ascomycete family Lobariaceae. In nemoral and boreal ecosystems of Europe, other lichen fungi pairing up with this photobiont are rare (Lobaria virens, Ricasolia amplissima) (Dal Grande et al. 2014). In subtropical forests, S. reticulata is shared among several species of lichen-forming fungi of the Lobariaceae.
+     For most lichens, an individual green algal photobiont species associates with many lichen-forming fungi, and a single lichen-forming fungus partners with several green algal species. However, Lobaria pulmonaria pairs up with only a single green-algal species, and is therefore one of the most specific symbioses known in lichens to date. The association is mainly transmitted vertically with some episodes of horizontal transmission (Dal Grande et al. 2012; Werth & Scheidegger 2012). In Europe, phylogeographic structures are highly similar for Lobaria pulmonaria and Symbiochloris reticulata (Widmer et al. 2012). Moreover, a high frequency of geographically restricted alleles indicates that Southern Italy and the Balkans are primary refugial areas, characterized by long-term historical continuity of the symbiotic association, possibly over several glacial-interglacial cycles.
+     Genetic structures are highly similar among the two symbionts also on smaller spatial scales (Werth & Scheidegger 2012; Nadyeina et al. 2014). One of the most striking population genetic patterns found in lichens to date is that of Lobaria pulmonaria where two fungal-algal gene pools showed climatic associations, one occurring on mountain ridges and the other in valleys and slopes of the Carpathian mountains (Nadyeina et al. 2014). This pattern may have been shaped by natural selection.
+
+References
+	•	Dal Grande F, Beck A, Cornejo C, Singh G, Cheenacharoen S, Nelsen MP, Scheidegger C (2014) Molecular phylogeny and symbiotic selectivity of the green algal genus Dictyochloropsis s.l. (Trebouxiophyceae): a polyphyletic and widespread group forming photobiont-mediated guilds in the lichen family Lobariaceae. New Phytologist 202, 455-470.
+	•	Dal Grande F, Widmer I, Wagner HH, Scheidegger C (2012) Vertical and horizontal photobiont transmission within populations of a lichen symbiosis. Molecular Ecology 21, 3159-3172.
+	•	Nadyeina O, Dymytrova L, Naumovych A, Postoyalkin S, Werth S, Cheenacharoen S, Scheidegger C (2014) Microclimatic differentiation of gene pools in the Lobaria pulmonaria symbiosis in a primeval forest landscape. Molecular Ecology 23, 5164-5178.
+	•	Scheidegger C, Werth S (2009) Conservation strategies for lichens: insights from population biology. Fungal Biology Reviews 23, 55-66.
+	•	Škaloud P, Friedl T, Hallmann C, Beck A, Dal Grande F (2016) Taxonomic revision and species delimitation of coccoid green algae currently assigned to the genus Dictyochloropsis (Trebouxiophyceae, Chlorophyta). Journal of Phycology, DOI: 10.1111/jpy.12422.
+	•	Werth S, Scheidegger C (2012) Congruent genetic structure in the lichen-forming fungus Lobaria pulmonaria and its green-algal photobiont. Molecular Plant-Microbe Interactions 25, 220-230.
+	•	Widmer I, Dal Grande F, Excoffier L, Holderegger R, Keller C, Mikryukov VS, Scheidegger C (2012) European phylogeography of the epiphytic lichen fungus Lobaria pulmonaria and its green algal symbiont. Molecular Ecology 21, 5827-5844.
+
+Status
+
+[February 2017] The Lobaria pulmonaria Scotland genome was sequenced with Illumina, assembled with Velvet and then AllPathsLG, and annotated with the JGI Annotation Pipeline. Mitochondrial genome was assembled separately and is available in the downloads section.
+
+Summary statistics for the Lobaria pulmonaria Scotland v1.0 release are below. 
+Genome Assembly	
+Genome Assembly size (Mbp)	56.12
+Sequencing read coverage depth	145.5x
+# of contigs	2271
+# of scaffolds	1911
+# of scaffolds >= 2Kbp	1808
+Scaffold N50	300
+Scaffold L50 (Mbp)	0.05
+# of gaps	360
+% of scaffold length in gaps	0.4%
+Three largest Scaffolds (Mbp)	0.42, 0.32, 0.30
+
+ESTs	Data set	# sequences total	# mapped to genome	% mapped to genome
+EstClusters	ESTclusters	103899	82360	79.3%
+Ests	est.fasta	167967177	165731449	98.7%
+
+Gene Models	FilteredModels2	
+length (bp) of:	average	median
+gene	1546	1289
+transcript	1379	1134
+exon	464	290
+intron	87	60
+description:		
+protein length (aa)	401	313
+exons per gene	2.97	2
+# of gene models	15607	
+
+Collaborators
+
+DOE Joint Genome Institute
+Ólafur Andrésson at Háskóli Íslands
+Silke Werth at Karl-Franzens-Universität Graz
+Links
+
+JGI Symbiochloris reticulata Spain Portal
+JGI Lichens EcoGroup Portal
+JGI Lecanoromycetes PhyloGroup Portal
+Funding
+
+The work conducted by the U.S. Department of Energy Joint Genome Institute, a DOE Office of Science User Facility, is supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231.
+
+Proposal Name: Sequencing of the three cultured partners of the lichen Lobaria pulmonaria and the sequencing of the transcriptomes from the natural tripartite lichen under selected and controlled conditions. (Proposal ID: 529 / 300815)
+Proposal PI: Olafur Andresson
+Program Year: 2012
+Release Date: 2013-05-07
+
+Complete Genome Projects: 
+Project: Dictyochloropsis reticulata
+JGI Project Id: 1079951 
+JGI Proposal Id: 529 / 300815
+Release Date: 2014-08-08
+Related Projects: 405610
+Product: Plant Annotated Standard Draft
+
+Project: Lobaria pulmonaria Scotland Annotated Standard Draft
+JGI Project Id: 1006353 
+JGI Proposal Id: 529 / 300815
+Release Date: 2015-08-22
+Related Projects: 1070590, 1006354, 1006355, 1070591, 1006356
+Product: Fungal Annotated Standard Draft
+
+Project: Lobaria pulmonaria Scotland Metatranscriptome
+JGI Project Id: 1094229 
+JGI Proposal Id: 529 / 300815
+Release Date: 2015-11-05
+Related Projects: 1094230, 1094243, 1139712
+Product: Eukaryote Isolate Metatranscriptome
+
+Project: Lobaria pulmonaria Switzerland Metatranscriptome
+JGI Project Id: 1094227 
+JGI Proposal Id: 529 / 300815
+Release Date: 2015-11-05
+Related Projects: 1094228, 1094242
+Eukaryote Isolate Metatranscriptome
+
+Incomplete Genome Projects: 
+Gold ID         Organism (NCBI BioProject Name)   			Domain		Type			Project status
+Gp0118081	Nostoc sp. 'Lobaria pulmonaria (5183) cyanobiont'	BACTERIAL	Whole Genome Sequencing	incomplete
+
+Project Information 
+NCBI BioProjectID: 275880
+NCBI BioProject Accession: PRJNA275880
+NCBI Locus Tag: NLP
+Specimen: Organism
+Nucleic Acid: DNA
+Sequencing Strategy: WGS
+Project status: incomplete
+Project relevance: Evolution
+Sequencing Center: University of Iceland
+Project information visibility: Public
+
+Organism Information
+Organism Domain: Bacterial
+Phylogeny: Cyanobacteria
+Genus: Nostoc
+Strain: Lobaria pulmonaria 5183 cyanobiont
+Cultured: Yes
+Culture Type: Isolate
+Organism Type: Natural
+
+Organism Taxonomy: 
+NCBI Taxonomy ID: 1618022
+NCBI Superkingdom: Bacteria
+NCBI Phylum: Cyanobacteria
+NCBI Order: Nostocales
+NCBI Family: Nostocaceae
+NCBI Genus: Nostoc
+NCBI Species: Nostoc sp. 'Lobaria pulmonaria (5183) cyanobiont'
+
+#Other lichen genomes sequenced to date 
+##	Name	Assembly Length	# Genes	Published
+1	Asterochloris sp. Cgr/DA1pho v2.0	55,816,160	10,025	
+2	Cladonia grayi Cgr/DA2myc/ss v2.0	34,622,149	11,389	
+3	Endocarpon pusillum Z07020		37,130,611	9,238	Wang YY et al., 2014
+4	Lobaria pulmonaria Scotland v1.0	56,119,610	15,607	
+5	Symbiochloris reticulata Spain v1.0	58,316,282	13,073	
+6	Trypethelium eluteriae v1.0		32,160,005	11,858	
+7	Usnea florida ATCC18376 v1.0		44,323,432	12,649	
+8	Xanthoria parietina 46-1-SA22 v1.1	31,900,637	11,065	
