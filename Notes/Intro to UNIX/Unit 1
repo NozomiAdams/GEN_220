@@ -1,0 +1,225 @@
+#Notes from Genetics 220 - Computational Analysis of High Throughput Biological Data
+#Intro to Unix (I)
+
+Command Line, Directorires, & Files, Running Programs
+#Reveiwed Command Line in Bash on SWCarpentry
+#Starting with Permissions
+
+ls-1 will show a long version of listing output
+total 136
+-rw-r--r--   1 juliaadams  staff     30 Mar 26 14:09 ARC.log
+-rw-r--r--   1 root        staff    586 Feb 15 16:59 AT.postflight.764
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Course
+drwx------+ 25 juliaadams  staff    850 May 27 11:21 Desktop
+drwx------+ 61 juliaadams  staff   2074 May 27 13:01 Documents
+drwx------+ 48 juliaadams  staff   1632 May 27 12:58 Downloads
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Genomics
+drwxr-xr-x   2 juliaadams  staff     68 Mar 16 18:49 I Have Fun
+-rw-r--r--@  1 juliaadams  staff  24082 Mar 13 19:42 Intro perlreftut.rtf
+-rw-r--r--   1 juliaadams  staff      0 Feb 15 17:22 Keep
+drwx------@ 47 juliaadams  staff   1598 May 25 14:43 Library
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Movies
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Music
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Pictures
+drwxr-xr-x+  5 juliaadams  staff    170 Feb 15 16:10 Public
+drwxr-xr-x  30 juliaadams  staff   1020 Apr  6 17:11 UCLA
+drwx------   3 juliaadams  staff    102 Mar 25 16:38 VirtualBox VMs
+-rw-r--r--@  1 juliaadams  staff    154 Feb 16 17:17 ex1.py.rtf
+-rw-r--r--   1 juliaadams  staff      0 May 25 12:43 fileName.txt
+-rw-r--r--@  1 juliaadams  staff    397 Mar 13 19:42 hello.rtf
+-rw-r--r--   1 juliaadams  staff     69 Mar 26 14:09 mergeReads.log
+drwxr-xr-x  12 juliaadams  staff    408 Mar 23 16:10 miniconda3
+-rw-r--r--   1 juliaadams  staff    345 Mar 22 13:23 myseqfile.fa
+-rw-r--r--   1 juliaadams  staff     35 May 25 12:57 output.txt
+drwxr-xr-x   3 juliaadams  staff    102 Feb 16 10:51 perl5
+drwxr-xr-x   6 juliaadams  staff    204 Mar 21 21:55 temp
+-rw-r--r--   1 juliaadams  staff     13 May 25 14:31 text.txt
+-rw-r--r--   1 juliaadams  staff     68 Mar 26 14:09 trimReads.log
+-rw-r--r--   1 juliaadams  staff     16 Mar 22 13:32 what_is_my
+-rw-r--r--   1 juliaadams  staff      6 Mar 22 13:32 what_is_my_name
+
+#There is info on the file/folder and 3 sets of permissions listed there
+'d' -> it is a directory, 'l' -> it is a link, empty, it is a file
+User -> rwx or rw - permissions for the user
+Group
+All
+
+#What are permissions?
+r-is it readable
+w-is it writeable
+x-is it executable
+
+#Directories have to be executable to be able to be used/entered. Programs/applications need to be executable to be able
+to run them.
+
+#To delete things: 
+rm - for removing files 
+rm-r -- be careful removes recursively 
+rm-f - removes without prompting you
+rm-rf removes recursively without prompting (USE WITH CARE)
+
+#Let's remove text.txt $rm text.txt
+total 128
+-rw-r--r--   1 juliaadams  staff     30 Mar 26 14:09 ARC.log
+-rw-r--r--   1 root        staff    586 Feb 15 16:59 AT.postflight.764
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Course
+drwx------+ 25 juliaadams  staff    850 May 27 11:21 Desktop
+drwx------+ 61 juliaadams  staff   2074 May 27 13:01 Documents
+drwx------+ 48 juliaadams  staff   1632 May 27 12:58 Downloads
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Genomics
+drwxr-xr-x   2 juliaadams  staff     68 Mar 16 18:49 I Have Fun
+-rw-r--r--@  1 juliaadams  staff  24082 Mar 13 19:42 Intro perlreftut.rtf
+-rw-r--r--   1 juliaadams  staff      0 Feb 15 17:22 Keep
+drwx------@ 47 juliaadams  staff   1598 May 25 14:43 Library
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Movies
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Music
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Pictures
+drwxr-xr-x+  5 juliaadams  staff    170 Feb 15 16:10 Public
+drwxr-xr-x  30 juliaadams  staff   1020 Apr  6 17:11 UCLA
+drwx------   3 juliaadams  staff    102 Mar 25 16:38 VirtualBox VMs
+-rw-r--r--@  1 juliaadams  staff    154 Feb 16 17:17 ex1.py.rtf
+-rw-r--r--   1 juliaadams  staff      0 May 25 12:43 fileName.txt
+-rw-r--r--@  1 juliaadams  staff    397 Mar 13 19:42 hello.rtf
+-rw-r--r--   1 juliaadams  staff     69 Mar 26 14:09 mergeReads.log
+drwxr-xr-x  12 juliaadams  staff    408 Mar 23 16:10 miniconda3
+-rw-r--r--   1 juliaadams  staff    345 Mar 22 13:23 myseqfile.fa
+-rw-r--r--   1 juliaadams  staff     35 May 25 12:57 output.txt
+drwxr-xr-x   3 juliaadams  staff    102 Feb 16 10:51 perl5
+drwxr-xr-x   6 juliaadams  staff    204 Mar 21 21:55 temp
+-rw-r--r--   1 juliaadams  staff     68 Mar 26 14:09 trimReads.log
+-rw-r--r--   1 juliaadams  staff     16 Mar 22 13:32 what_is_my
+-rw-r--r--   1 juliaadams  staff      6 Mar 22 13:32 what_is_my_name
+$
+
+#Now let's delete "I Have Fun & I have fun" - 2 folders with 0 items 
+rm I Have Fun
+rm: I: No such file or directory
+rm: Have: No such file or directory
+rm: Fun: No such file or directory
+
+#also Removed the followed: what_is_my & what_is_my_name
+
+total 112
+-rw-r--r--   1 juliaadams  staff     30 Mar 26 14:09 ARC.log
+-rw-r--r--   1 root        staff    586 Feb 15 16:59 AT.postflight.764
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Course
+drwx------+ 25 juliaadams  staff    850 May 27 11:21 Desktop
+drwx------+ 61 juliaadams  staff   2074 May 27 13:01 Documents
+drwx------+ 48 juliaadams  staff   1632 May 27 12:58 Downloads
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Genomics
+drwxr-xr-x   2 juliaadams  staff     68 Mar 16 18:49 I Have Fun
+-rw-r--r--@  1 juliaadams  staff  24082 Mar 13 19:42 Intro perlreftut.rtf
+-rw-r--r--   1 juliaadams  staff      0 Feb 15 17:22 Keep
+drwx------@ 47 juliaadams  staff   1598 May 25 14:43 Library
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Movies
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Music
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Pictures
+drwxr-xr-x+  5 juliaadams  staff    170 Feb 15 16:10 Public
+drwxr-xr-x  30 juliaadams  staff   1020 Apr  6 17:11 UCLA
+drwx------   3 juliaadams  staff    102 Mar 25 16:38 VirtualBox VMs
+-rw-r--r--@  1 juliaadams  staff    154 Feb 16 17:17 ex1.py.rtf
+-rw-r--r--   1 juliaadams  staff      0 May 25 12:43 fileName.txt
+-rw-r--r--@  1 juliaadams  staff    397 Mar 13 19:42 hello.rtf
+-rw-r--r--   1 juliaadams  staff     69 Mar 26 14:09 mergeReads.log
+drwxr-xr-x  12 juliaadams  staff    408 Mar 23 16:10 miniconda3
+-rw-r--r--   1 juliaadams  staff    345 Mar 22 13:23 myseqfile.fa
+-rw-r--r--   1 juliaadams  staff     35 May 25 12:57 output.txt
+drwxr-xr-x   3 juliaadams  staff    102 Feb 16 10:51 perl5
+drwxr-xr-x   6 juliaadams  staff    204 Mar 21 21:55 temp
+-rw-r--r--   1 juliaadams  staff     68 Mar 26 14:09 trimReads.log
+
+#Now remove ex1.py.rtf via rm ex1.py.rtf
+total 104
+-rw-r--r--   1 juliaadams  staff     30 Mar 26 14:09 ARC.log
+-rw-r--r--   1 root        staff    586 Feb 15 16:59 AT.postflight.764
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Course
+drwx------+ 25 juliaadams  staff    850 May 27 11:21 Desktop
+drwx------+ 61 juliaadams  staff   2074 May 27 13:01 Documents
+drwx------+ 48 juliaadams  staff   1632 May 27 12:58 Downloads
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Genomics
+drwxr-xr-x   2 juliaadams  staff     68 Mar 16 18:49 I Have Fun
+-rw-r--r--@  1 juliaadams  staff  24082 Mar 13 19:42 Intro perlreftut.rtf
+-rw-r--r--   1 juliaadams  staff      0 Feb 15 17:22 Keep
+drwx------@ 47 juliaadams  staff   1598 May 25 14:43 Library
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Movies
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Music
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Pictures
+drwxr-xr-x+  5 juliaadams  staff    170 Feb 15 16:10 Public
+drwxr-xr-x  30 juliaadams  staff   1020 Apr  6 17:11 UCLA
+drwx------   3 juliaadams  staff    102 Mar 25 16:38 VirtualBox VMs
+-rw-r--r--   1 juliaadams  staff      0 May 25 12:43 fileName.txt
+-rw-r--r--@  1 juliaadams  staff    397 Mar 13 19:42 hello.rtf
+-rw-r--r--   1 juliaadams  staff     69 Mar 26 14:09 mergeReads.log
+drwxr-xr-x  12 juliaadams  staff    408 Mar 23 16:10 miniconda3
+-rw-r--r--   1 juliaadams  staff    345 Mar 22 13:23 myseqfile.fa
+-rw-r--r--   1 juliaadams  staff     35 May 25 12:57 output.txt
+drwxr-xr-x   3 juliaadams  staff    102 Feb 16 10:51 perl5
+drwxr-xr-x   6 juliaadams  staff    204 Mar 21 21:55 temp
+-rw-r--r--   1 juliaadams  staff     68 Mar 26 14:09 trimReads.log
+
+#Now going to remove fileName.txt & output.txt via rm fileName.txt and rm output.txt
+#Could also remove hello.rtf
+
+$rm fileName.txt
+$rm output.txt
+$rm hello.rtf
+$ls -l
+total 88
+-rw-r--r--   1 juliaadams  staff     30 Mar 26 14:09 ARC.log
+-rw-r--r--   1 root        staff    586 Feb 15 16:59 AT.postflight.764
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Course
+drwx------+ 25 juliaadams  staff    850 May 27 11:21 Desktop
+drwx------+ 61 juliaadams  staff   2074 May 27 13:01 Documents
+drwx------+ 48 juliaadams  staff   1632 May 27 12:58 Downloads
+drwxr-xr-x   2 juliaadams  staff     68 Feb 16 15:28 Genomics
+drwxr-xr-x   2 juliaadams  staff     68 Mar 16 18:49 I Have Fun
+-rw-r--r--@  1 juliaadams  staff  24082 Mar 13 19:42 Intro perlreftut.rtf
+-rw-r--r--   1 juliaadams  staff      0 Feb 15 17:22 Keep
+drwx------@ 47 juliaadams  staff   1598 May 25 14:43 Library
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Movies
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Music
+drwx------+  3 juliaadams  staff    102 Feb 15 16:10 Pictures
+drwxr-xr-x+  5 juliaadams  staff    170 Feb 15 16:10 Public
+drwxr-xr-x  30 juliaadams  staff   1020 Apr  6 17:11 UCLA
+drwx------   3 juliaadams  staff    102 Mar 25 16:38 VirtualBox VMs
+-rw-r--r--   1 juliaadams  staff     69 Mar 26 14:09 mergeReads.log
+drwxr-xr-x  12 juliaadams  staff    408 Mar 23 16:10 miniconda3
+-rw-r--r--   1 juliaadams  staff    345 Mar 22 13:23 myseqfile.fa
+drwxr-xr-x   3 juliaadams  staff    102 Feb 16 10:51 perl5
+drwxr-xr-x   6 juliaadams  staff    204 Mar 21 21:55 temp
+-rw-r--r--   1 juliaadams  staff     68 Mar 26 14:09 trimReads.log
+
+#Now It is a bit cleaned, but now clean out Desktop
+$cd Desktop
+$pwd
+/Users/juliaadams/Desktop
+
+$ls
+GEN220
+Installing UCLA Genomics Course
+Installing UCLA Genomics Course2
+Jason's Notes
+Jason's Notes 2_March23rd2017
+Jason's Notes3_March23rd2017 
+Jason's Notes5_March23rd2017
+Jason's notes 4_March23rd2017
+LaKretz17.ova
+March26th2017-Notes
+March26th2017_Notes
+March27thNotes_UCLA
+Notes for insatlling ipyrad
+Notes on Lichens around March 31st
+SundayWalkthrough_March26th2017.txt
+Terminal Saved Output
+Terminal Saved Output_CommandLineCrash3.21.17
+UCLA Collaboratory Day 3
+UCLA Python Collaboratory Day2
+UCLA Python Day 2
+UCLA Python Day 2 Notes
+
+#Cleaned up Desktop into UCLA & Programming Folders
+
+#File Content: Want to read the content of a text file you can use these commands
+cat - will spit out the whole file on the screen: use control c to force exit out of cat
+more - a paginator will display one page at a time (based on your screen)
+less - similar to more, but has additional problems
