@@ -404,6 +404,161 @@ listing.txt
 one.txt
 
 #SDERR error message capture 
+#If there are error messages they go to the STDERR stream and can be captured with:
+$ ls JUNK >> listing.txt
+$ cat listing.txt
+listing.txt
+one.txt
+$ ls JUNK 2>> listing.txt
+listing.txt
+one.txt
+ls: JUNK: No such file or directory # this is an error message
+$ program 1> log 2> err # STDOUT to one file, STDERR to another
+$ program >& all_output # combine STDOUT and STDERR
+
+#PIPING PROGRAM OUTPUT 
+#The pipe operator | allows you to instead of redirecting output to a file, redirect it 
+#to another program. Specifically the STDIN of the other program. This is very powerful and allows you to 
+#chain together different processes
+$ zcat data/Nc20H.expr.tab.gz | wc -l
+# output from zcat is printed to STDOUT and that is redirected
+# to the command wc with the -l option which in turn
+# expects input on STDIN.
+# Output from a program can be fed to a pager like less
+$ blastn -help | less
+$ fasta36 query db | more
+$ fasta36 query db | tee report.out | more
+
+#tee is a program which reads from STDIN and writes this BOTH to a file and to SDOUT.
+#A way to monitor a program but to also detach from reading the messages and still capture it all to a file
+
+#BUILDING PIECES INTO USEFUL, REUSABLE COMPONENTS
+#Multiple pipes can be used, and built together. we can start to construct a series of queries
+#We will go more into detail in the next lecture, but we process a file and capture it.
+# shows top ten results from a blast report
+$ zcat data/blast.out.gz | head -n 10
+# returns the total number of unique items found in column 1
+$ zcat data/blast.out.gz | awk '{print $1}' | sort | uniq | wc -l
+# take output from blast program, compress it on the fly to a
+new file
+$ blastn -query query.fa -db db.fa -outfmt 6 | gzip -c > blastresult.out.gz
+
+#WILDCARDS ON THE COMMANDLINE
+#use the '*' to match anything
+#use '?' to match any character 1 time
+#indicate specific characters in '[]'
+$ rm *.jpg   # match all files ending in .jpg
+$ ls [A-Za-z]*.jpg # match JPG files with names starting with a
+letter
+$ ls ???.jpg # match all filenames with three characters
+
+#SOME COMMANDLINE/FILENAME GOTCHAS
+Julias-MacBook:~ juliaadams$ rm --oops
+rm: illegal option -- -
+usage: rm [-f | -i] [-dPRrvW] file ...
+       unlink file
+Julias-MacBook:~ juliaadams$ rm ./--oops
+Julias-MacBook:~ juliaadams$ ls
+ARC.log			Keep			mergeReads.log
+AT.postflight.764	Library			miniconda3
+Course			Lichen			myseqfile.fa
+Desktop			Movies			perl5
+Documents		Music			temp
+Downloads		Pictures		trimReads.log
+E3Q6S8.fa		Public			what_is_my
+Genomics		UCLA			what_is_my_name
+Intro perlreftut.rtf	VirtualBox VMs
+Julias-MacBook:~ juliaadams$ rm ./what_is_my
+Julias-MacBook:~ juliaadams$ ls
+ARC.log			Keep			mergeReads.log
+AT.postflight.764	Library			miniconda3
+Course			Lichen			myseqfile.fa
+Desktop			Movies			perl5
+Documents		Music			temp
+Downloads		Pictures		trimReads.log
+E3Q6S8.fa		Public			what_is_my_name
+Genomics		UCLA
+Intro perlreftut.rtf	VirtualBox VMs
+Julias-MacBook:~ juliaadams$ rm ./what_is_my_name
+Julias-MacBook:~ juliaadams$ ls
+ARC.log			Intro perlreftut.rtf	UCLA
+AT.postflight.764	Keep			VirtualBox VMs
+Course			Library			mergeReads.log
+Desktop			Lichen			miniconda3
+Documents		Movies			myseqfile.fa
+Downloads		Music			perl5
+E3Q6S8.fa		Pictures		temp
+Genomics		Public			trimReads.log
+Julias-MacBook:~ juliaadams$ rm ./E3Q6S8.fa
+Julias-MacBook:~ juliaadams$ ls
+ARC.log			Keep			VirtualBox VMs
+AT.postflight.764	Library			mergeReads.log
+Course			Lichen			miniconda3
+Desktop			Movies			myseqfile.fa
+Documents		Music			perl5
+Downloads		Pictures		temp
+Genomics		Public			trimReads.log
+Intro perlreftut.rtf	UCLA
+Julias-MacBook:~ juliaadams$ pwd
+/Users/juliaadams
+Julias-MacBook:~ juliaadams$ cd Desktop
+Julias-MacBook:Desktop juliaadams$ pwd
+/Users/juliaadams/Desktop
+Julias-MacBook:Desktop juliaadams$ ls
+CA Lichens	LaKretz17.ova	Papers		UCLA
+GEN220		Lichen		Programming
+Julias-MacBook:Desktop juliaadams$ cd ..
+Julias-MacBook:~ juliaadams$ pwd
+/Users/juliaadams
+Julias-MacBook:~ juliaadams$ ls
+ARC.log			Keep			VirtualBox VMs
+AT.postflight.764	Library			mergeReads.log
+Course			Lichen			miniconda3
+Desktop			Movies			myseqfile.fa
+Documents		Music			perl5
+Downloads		Pictures		temp
+Genomics		Public			trimReads.log
+Intro perlreftut.rtf	UCLA
+Julias-MacBook:~ juliaadams$ touch star
+Julias-MacBook:~ juliaadams$ ls
+ARC.log			Keep			VirtualBox VMs
+AT.postflight.764	Library			mergeReads.log
+Course			Lichen			miniconda3
+Desktop			Movies			myseqfile.fa
+Documents		Music			perl5
+Downloads		Pictures		star
+Genomics		Public			temp
+Intro perlreftut.rtf	UCLA			trimReads.log
+Julias-MacBook:~ juliaadams$ echo "oh boy" > st*r
+Julias-MacBook:~ juliaadams$ echo "oh boy" > st*r
+Julias-MacBook:~ juliaadams$ ls st*r
+star
+Julias-MacBook:~ juliaadams$ rm st*r
+Julias-MacBook:~ juliaadams$ ls st*r
+ls: st*r: No such file or directory
+Julias-MacBook:~ juliaadams$ echo "oh boy" > "st*r"; touch star
+Julias-MacBook:~ juliaadams$ rm "st*r" # or rm st\*r
+Julias-MacBook:~ juliaadams$ ls
+ARC.log			Keep			VirtualBox VMs
+AT.postflight.764	Library			mergeReads.log
+Course			Lichen			miniconda3
+Desktop			Movies			myseqfile.fa
+Documents		Music			perl5
+Downloads		Pictures		star
+Genomics		Public			temp
+Intro perlreftut.rtf	UCLA			trimReads.log
+Julias-MacBook:~ juliaadams$ rm ./star
+Julias-MacBook:~ juliaadams$ ls
+ARC.log			Keep			VirtualBox VMs
+AT.postflight.764	Library			mergeReads.log
+Course			Lichen			miniconda3
+Desktop			Movies			myseqfile.fa
+Documents		Music			perl5
+Downloads		Pictures		temp
+Genomics		Public			trimReads.log
+Intro perlreftut.rtf	UCLA
+Julias-MacBook:~ juliaadams$ ls
+
 
 
 
