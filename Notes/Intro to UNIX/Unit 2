@@ -356,5 +356,54 @@ Julias-MacBook:~ juliaadams$ #my name is Joe
 #COMPRESSION
 #File compression is important for saving space on disks. Also for transferring
 data between hosts, compressed files will take less time to transfer
-1. gzip for GNUzip compr  
+1. gzip for GNUzip compression. Single file at a time. (biocluster) pigz is parallelized
+and can use multiple processors
+$ du -h data/Nc20H.expr.tab        # report how big the file is
+656K    data/Nc20H.expr.tab
+$ gzip data/Nc20H.expr.tab         # to compress
+$ du -h data/Nc20H.expr.tab.gz     # report size of compressed file 
+236K    data/Nc20H.expr.tab.gz
+$ gunzip data/Nc20H.expr.tab.gz    # to uncompress
+
+2. bizip2 for Bzip compression. Better compression than gzip, but slower (biocluster) pbzip2
+is parallelized and can use multiple processors
+$ bzip2 data/Nc20H.expr.tab        # compress with bzip2
+$ du -h data/Nc20H.expr.tab.bz2    # report size of bzipped file
+204K    data/Nc20H.expr.tab.bz2
+$ bunzip2 data/Nc20H.expr.tab.bz2
+3. zcat, zmore, and bzcat, bzmore to read files on the fly (without uncompressing entire file at once)
+
+#File/disk usage with du
+-h -- human readable (eg bytes, K, G, and T)
+$ du -h data/Nc20H.expr.tab        # report how big the file is
+
+#MANUAL PAGES WITH man
+man ls
+[1]+  Stopped                 man ls
+
+#SETTING ON THE SYSTEM PREFERENCES WITH .bashrc, .bash_profile, .profile
+#How the shell determines what variables to set and load is based on a series of system & local 
+#confirguration files. These are the initialization options that are setup every time a shell is run 
+- when you login or if you type bash you start a new shell session.
+PATH and all other variables set in these files. They can be dependencies on other files, 
+so multiple places can be sourced for these parameters. 
+Other environmental variables are important when we start to install Python (PYTHONPATH) or 
+Perl (PERL5LIB) or other libraries.
+If you make changes and want to immediately see the difference without logging out/logging back in 
+Use. $source ~/.bash)profile
+
+#CONNECTING PROGRAMS WITH PIPES
+#There are 3 types of data streams in UNIX
+SDOUT - standard output stream (stream 1)
+STDERR - standard error stream (stream 2)
+STDIN - standard input stream (stream 0)
+#When running a program, it prints to a screen that is usually STDOUT. This can be 
+captured with > to redirect to a file 
+$ ls > listing.txt
+listing.txt
+one.txt
+
+#SDERR error message capture 
+
+
 
