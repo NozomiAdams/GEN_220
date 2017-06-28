@@ -1,1 +1,220 @@
+Linux Part II: Using Biocluster
+#Storage
+Home is used for scripting, debugging, and small files
+/rhome/username
+Bigdata is used for parallel jobs, high read/write operations (load) and big files
+/bigdata/labname/username
+/bigdata/labname/shared
 
+Note: All lab members sahre the same bigdata pool
+Total = bigdata/labname/shared + /bigdata/labname/labmember1 + /bigdata/labname/labmember2 +
+/bigdata/labname/labmemberX
+
+Scratch is used for quick access and only temporary (30 days max)
+
+SOFTWARE MODULE SYSTEM
+Print available modules
+module avail
+
+Print available modules starting with R
+module avail R
+
+Load default module R
+module load R
+
+Load specific module R version
+module load R/3.2.0
+
+Print list of loaded modules
+module list
+
+Unload module R
+module unload R
+
+Unload specific module R
+module unload R/3.2.0
+
+ENVIRONMENT VARIABLES
+#Biocluster uses bash as the deafult shell environment
+#Within this environment, variables ca be set and reused
+MYVAR = 'Something'
+export MYVAR='Something'
+echo $MYVAR
+#Some software utilizes this feature and requires that specific environment varialbes be set
+$HOME #contains your home path
+$USER #contains your username
+$PATH #contains paths of executables
+$LD_LIBRARY_PATH #contains paths of dependencies 
+
+#Torque (PBS)
+$PBS_O_WORKDIR 
+
+SCRIPTING
+#converting code into a script is useful
+#easy to run - blackbox
+#easy to maintain - consolidated code
+#easy to distribute - capsulated code
+#easy to automate (crontab?) - does not require interaction
+
+1. #!(SheBang) - First line in file which defines the interpreter
+#!/bin/bash
+2. Permissions - At least the owner of the file execute permissions
+chmod u+x myscript.sh
+3. Pass arguments via command line - Makes script reusable
+myscript.sh prot.fasta 2
+4. Add to PATH - Makes script callable by name without path
+export PATH=~/bin:$PATH # add to .bashrc
+
+SCRIPTING 
+bash commands
+cd ~/mywork
+module load ncbi-blast
+module load db-ncbi
+blastp - query prot.faa -db $NCBI_DB/nr - out prot.txt -num_threads 2
+
+SCRIPTING
+examples: myscript.sh prot.fasta 2
+#!/bin/bash -1
+#load modules
+module load ncbi-blast
+module load db-ncbi
+#change directory 
+cd ~/mywork
+#run BLAST
+blastp -query $1 -db $NCBI_DB/nr -out $1.txt -num_threads $2
+
+QUEUING SYSTEM
+#check how busy the queue is overall (CPU, memory, walltime, etc.)
+showbf -S | less #press 'q' to quit
+#check how many processors are immediately available per walltime window on the batch queue
+showbf - f batch
+#chek earliest start and completion times (should not be infinity)
+showstart JOBID
+#check if a job is held
+showhold | grep JOBID
+#check status of job and display reason for failure (if applicable)
+check job JOBID
+
+QUEUING SYSTEM
+qsub (basic job submission)
+1. echo 'myscript.sh prot.faa 2' | qsub
+2. qsub -F 'prot.faa 2' myscript.sh
+#Additional arguments (man qsub)
+-I
+-q highmem
+-1 nodes=1:ppn=2,mem=50gb,walltime=03:00:00
+-N JobName
+-M your@email.com -m abe
+
+STOUT files
+SCRIPTNAME.sh.oJOBID OR STDIN.oJOBID
+SCRIPTNAME.sh.eJOBID OR STDIN.eJOBID
+
+QUEUING SYSTEM
+qsub: default resources
+ batch (256 cores MAX)
+ - mem =1G
+ - nodes =1
+ - ppn = 1
+ - walltime = 168:00:00
+ 
+highmem (32 cores MAX)
+ - mem =16G
+ - nodes =1
+ - ppn = 1
+ - walltime = 48:00:00
+ 
+ #NOTE: Each user has a 256 core total max. Each lab has a 512 core total max.
+ 
+ QUEUING SYSTEM
+ qsub advanced 
+ 1. Array submission: 
+ qsub -t 1-100 myscript.sh
+ 2. Dependency submission (man qsub)
+ qsub -W depend=afterok:JOBID myscript.sh
+ qsub -W depend=before:JOBID myscript.sh
+ 3. Multi-threaded submission
+ qsub -1 nodes=1:ppn=8 myscript.sh
+ 4. OpenMBI submission (TBA)
+ qsub -1 nodes=2:ppn=8 myscript.sh
+ 
+ QUEUING SYSTEM
+ #!/bin/bash -1
+ #PBS -t 1-2
+ #load modules
+ module load ncbi-blast
+ module load db-ncbi
+ #change directory using PBS environment variable 
+ cd $PBS_O_WORKDIR
+ 
+ #Run BLAST
+ blastp -query $PBS_ARRAYID.$1 -db $NCBI_DB/nr -out $PBS_ARRAYID.$1.txt
+ -num_threads $2
+ 
+  QUEUING SYSTEM
+  qstat
+  #view your current jobs and their status
+  q stat -u jhayes
+  #more detailed info (node info & expanded array jobs)
+  qstat -nt1 -u jhayes
+  
+  QUEUING SYSTEM
+  qdel
+  #remove job from queuing system
+  qdel JOBID
+  #remove entire array job from queuing system
+  qdel JOBID[]
+  #remove job from array in queuing system
+  qdel JOBID[ARRAYID]
+  
+  SCREEN/TMUX
+  #screen and Tmux are tools that allow you to manage multiple persistent login sessions
+  #mainly utilized for scripting and debugging
+  #DOS
+  #continue running session even if connection is lost
+  #reconnnect from a diferent machine
+  #side-by-side "window" orientation
+  #check for unused sessions and close them
+  DONT'S 
+  #open a new session for every task
+  leave unused sessions open
+  open sessions on cluster node
+  
+  SCREEN/TMUX (don't forget to 'exit' or 'kill' your sessions
+  open a new session: screen
+  detach from a session: C-a d
+  resume a previous session: screen -rd
+  open new window C-a c
+  rename window: C-a A
+  navigate to previous or next window: C-a p OR C-a n
+  Window list: C-a "
+  Split window horizontally or vertically: C-a S or C-a |
+  Navigate window panes: C-a tab
+  Close window pane: C-a X
+  
+  Tmux - quick reference (screen/vi mode)
+  open a new session: tmux
+  detach from a session: C-a d
+  resume a previous session: tmux attach -d
+  open a new window C-a c
+  rename window
+  C-a ,
+  navigate to previous or next window: C-a p OR C-a n
+  Window list: C-a w
+  Split window horizontally or vertically: C-a " OR C-a %
+  Navigate window panes: C-a arrow-key
+  close windown C-a s
+  
+  SHARING FILES ON THE WEB
+  #simply create a symbolic link or move the files into your html directory when you want
+  to share them. For example, log into Owl and do the following
+1. Make new web project directory
+mkdir www-project
+2. Create a default test file
+echo '<h1>Hello!</h1>' > www-project/index.html
+3. Create shortcut/link for new web project in html directory 
+ln -s www-project ~/.html/
+
+  
+  
+ 
