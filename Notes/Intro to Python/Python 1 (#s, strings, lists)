@@ -1,1 +1,463 @@
+PYTHON
+#To run a script in bash/shell
+$bash myscript.sh
 
+#To run code for python we will do
+$python myscript.py
+
+A FIRST SCRIPT
+
+Julias-MacBook:Documents juliaadams$ python hello.py
+Hello World!
+Julias-MacBook:Documents juliaadams$ python hello.py > message.txt
+Julias-MacBook:Documents juliaadams$ cat message txt
+cat: message: No such file or directory
+cat: txt: No such file or directory
+Julias-MacBook:Documents juliaadams$ cat message.txt
+Hello World!
+Julias-MacBook:Documents juliaadams$ 
+print("Hello World)
+
+SOME MATH WITH THE INTERPRETER
+Julias-MacBook:Documents juliaadams$ PYTHON
+Python 3.6.0 |Continuum Analytics, Inc.| (default, Dec 23 2016, 13:19:00) 
+[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 3+10
+13
+>>> 33/13
+2.5384615384615383
+>>> 33/13.0
+2.5384615384615383
+>>> 2**10 #2^10
+1024
+>>> (909+951)/2.0 #paranthesees make a difference
+930.0
+>>> 909+951/2
+1384.5
+
+MODULES FOR MATH
+#python has the concept of modules or libraries that contains routines we can re-use.
+#we will spend more time on the types of modules that exist 
+
+>>> sqrt(9)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'sqrt' is not defined
+>>> import math
+>>> math.sqrt(9)
+3.0
+>>> math.pow(2,10)
+1024.0
+>>> 33/12.0
+2.75
+>>> 33.13.0
+  File "<stdin>", line 1
+    33.13.0
+          ^
+SyntaxError: invalid syntax
+>>> 33/13.0
+2.5384615384615383
+>>> math.cel(33/13.0) #round up
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: module 'math' has no attribute 'cel'
+>>> math.ceil(33/13.0) #round up
+3
+>>> math.floor(33/13.0) #round down
+2
+>>> round(2.2) #round works as you expect for rounding (<0.5)
+2
+>>> round(2.6) #round works as you expect for rounding (>=.5)
+3
+
+OTHER MATH CAPABILITIES
+The % operator is modulus - it means return the remainder after dividing by the
+number. It is useful to see if something divides evenly into a number
+>>> 10/3
+3.3333333333333335
+>>> 10 % 3
+1
+>>> 10 % 3 #10/3 is 3 with remainder of 1
+1
+>>> 10/2
+5.0
+>>> 10%2
+0
+#This can be useful to see if something is "Modulo" something (or mod)- really 
+useful when looking at sequence data and checking to see if it will translate
+Is the length/value mod 3==0 means it is divisible perfectly by 3? 
+
+STRINGS
+#QUOTES can define the different special characters and use of strings
+>>> 'break dance'
+'break dance'
+>>> "break dance"
+'break dance'
+>>> "don't break dance"
+"don't break dance"
+>>> 'don\'t break dance'
+"don't break dance"
+>>> ('concatenate' 'these' 'together')
+'concatenatethesetogether'
+
+VARIABLES
+#data can be assigned to variables. Variables don't exist until they are declared
+#The = is used for assignmet. Some modifiers allow for modifying variable in place
++= add to the value of the variable 
+-=, /=, *= are other
+
+>>> d = 0
+>>> d
+0
+>>> print("d is 0") + d
+d is 0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'
+>>> d =8*7
+>>> print d
+  File "<stdin>", line 1
+    print d
+          ^
+SyntaxError: Missing parentheses in call to 'print'
+>>> print(d)
+56
+>>> d+=100
+>>> print(d)
+156
+
+STRING FUNCTIONS
+#Documented well in the python string library code.
+string.find(substring,[,starting[,end]]) Find a substring within a string
+
+>>> str = "Jumping cow over the moon"
+>>> str.find("cow")
+8
+>>> str.find("o") #start searching from beginning 
+9
+>>> str.find("o",12) #start searching after character 12
+12
+#sring.split(separator, max_split) Split a string into a list based on a 
+separator (great for column delimited data!). max_splits specifies if it should 
+stop after N separators are found
+
+>>> str = "Jumping cow over the moon"
+>>> str.split(" ")
+['Jumping', 'cow', 'over', 'the', 'moon']
+>>> str.split(" ",2)
+['Jumping', 'cow', 'over the moon']
+>>> d
+
+SUBSTRING-EXTRACTING PARTS OF A LARGER STRING
+#you can query the string with the [] operator to get a subset of the string
+>>> msg="I am a golden god!"
+>>> msg[:4] #everything before position 4
+'I am'
+>>> msg[7:13] #get a middle part of 7-15
+'golden'
+>>> msg[14:] # get from 14 to the end
+'god!'
+
+LISTS
+#for collecting enumerated items
+>>> l = [ 2, 3, 5]
+>>> l[0] # lists start at 0
+2
+>>> l[1:3]
+3,5
+>>> l.append(10)
+>>> print l
+[2, 3, 5, 10]
+#the sum() function will summate a list, len() will report how long it is. max()
+will report the largest number is a list
+>>> sum(l)
+20
+>>> len(l)
+4
+>>> max(l)
+10
+
+LISTS OTHER TOOLS
+#lists can be sorted
+>>> l = [10,2,17,4]
+>>> l.sort()
+>>> l
+[2, 4, 10, 17]
+>>> ls=['zf','fz','no','apple']
+>>> ls.sort()
+>>> print ls
+  File "<stdin>", line 1
+    print ls
+           ^
+SyntaxError: Missing parentheses in call to 'print'
+>>> print(ls)
+['apple', 'fz', 'no', 'zf']
+
+#List comprehesion - we will do more on this when we cover loops
+>>> squares = []
+>>> for x in range(10):
+...     squares.append(x**2)
+... print(squares)
+  File "<stdin>", line 3
+    print(squares)
+        ^
+SyntaxError: invalid syntax
+>>> squares = [x**2 for x in range(10)]
+>>> squares
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+USING SPLIT TO PARSE STRINGS
+#starting with strings containing several parts which encode information you want
+ q = "Symbol:NASDAQ=AAPL;Date:2015-10-01;Performance:Open=111.29,Close=109.56"
+>>> types = q.split(";")
+>>> print(types)
+['Symbol:NASDAQ=AAPL', 'Date:2015-10-01', 'Performance:Open=111.29,Close=109.56']
+>>> symbolset = types[0].split(":")
+>>> print symbolset
+  File "<stdin>", line 1
+    print symbolset
+                  ^
+SyntaxError: Missing parentheses in call to 'print'
+>>> print(symbolset)
+['Symbol', 'NASDAQ=AAPL']
+>>> symbol = symbolset[1].split("=")
+>>> symbol
+['NASDAQ', 'AAPL']
+>>> print(symbol[1])
+AAPL
+
+DOCUMENTATION AND COMMENTS
+comments start with a #
+There are also other self-documentation feature to make it easy to generate readable documentation
+for web or other sites. These are flanked with three double quotes 
+"""Documentation here"""      
+# can also be on multiple lines
+"""This message could be concise, on multiple lines, and
+later I could tell you more about
+my program or function"""
+
+PRINT INFORMATION OUT
+#print can accomodate a lot of types of data, but it doesn't know how to mix types that well
+>>> l = [7, 8, 9]
+>>> print l
+[7, 8, 9]
+>>> print "the list is " + l      
+TypeError: cannot concatenate 'str' and 'list' objects
+>>> print "the list is " + str(l)
+the list is [7, 8, 9]
+>>> print "the first item in the list is " + l[0] 
+TypeError: cannot concatenate 'str' and 'int' objects
+>>> print "the first item in the list is " + str(l[0])
+the first item in the list is 7      
+# use the repr function to also print out the represenetation of
+#an object
+>>> print "the square of 8 is " + repr(8**2)
+the square of 8 is 64
+
+repr FUNCTION TO DISPLAY AN OBJECT/STRING/NUMBER
+#use repr to print out literally the string
+hello = 'hello world\n'
+>>> print hello
+  File "<stdin>", line 1
+    print hello
+              ^
+SyntaxError: Missing parentheses in call to 'print'
+>>> print(hello)
+hello world
+
+>>> print(repr(hello))
+'hello world\n'
+
+MORE FANCY PRINTING
+#can use formatting to print some things out like these important numbers & phrase
+n = [1,2,'oh my god']
+>>> print(n)
+[1, 2, 'oh my god']
+>>> print(n[0].rjust(5),n[1].rjust(5),n[2].ljust(10))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'int' object has no attribute 'rjust'
+>>> print(repr(n[0]).rjust(5), repr(n[1]).rjust(5), n[2].ljust(10))
+    1     2 oh my god 
+>>> print(repr(n[0]).ljust(5), repr(n[1]).rjust(5), n[2].ljust(10))
+1         2 oh my god 
+>>> print(repr(n[0]).ljust(5), repr(n[1]).rjust(5), n[2].rjust(10))
+1         2  oh my god
+>>> print(repr(n[0]).rjust(5), repr(n[1]).rjust(5), n[2].rjust(10))
+    1     2  oh my god
+>>> print(repr(n[0]).rjust(5), repr(n[1]).rjust(5), n[2].ljust(10))
+    1     2 oh my god
+    
+PRINT WITH PLACEHOLDERS
+>>> a = 15
+>>> b = 41
+>>> print("a+b=",a+b)
+a+b= 56
+>>> print 
+<built-in function print>
+>>> print"{}+{}={}".format(a,b,a+b)
+  File "<stdin>", line 1
+    print"{}+{}={}".format(a,b,a+b)
+                  ^
+SyntaxError: invalid syntax
+>>> print("{}+{}={}".format(a,b,a+b))
+15+41=56
+>>> print("{}({})+{}({})={}".format("a",a,"b",b,a+b))
+a(15)+b(41)=56
+
+#Problems to try in class
+1. >>> 2146/13
+165.07692307692307
+2. assign a string to a variable, determine how long the string is, print out the first 2 letters of the string
+>>> t = [1,2,4]
+>>> t
+[1, 2, 4]
+>>> len(t)
+3
+>>> print(str[0])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'type' object is not subscriptable
+>>> t.sort()
+>>> t
+[1, 2, 4]
+>>> t.append(3)
+>>> t
+[1, 2, 4, 3]
+>>> t.sort()
+>>> t
+[1, 2, 3, 4]
+>>> len(t)
+4
+>>> max(t)
+4
+>>> min(t)
+1
+>>> t[0]
+1
+>>> t[1]
+2
+>>> t[3]
+4
+
+3. create a list from the string "a-b-cc-de-fgh" where the '-' separate the words. print out the length of list.
+>>> m = ['a','b','cc','de','fgh']
+>>> m
+['a', 'b', 'cc', 'de', 'fgh']
+>>> len(m)
+5
+
+4. Make a list mixed with words and numbers, sort it. How does it behave?
+>>> l = ['a','b','c1','1','2']
+>>> l
+['a', 'b', 'c1', '1', '2']
+
+5. Calculate the mean of a list of numbers (4, 8, 15, 16, 23, 42)
+>>> m = [4,8,15,16,23,48]
+>>> m
+[4, 8, 15, 16, 23, 48]
+>>> m.sort()
+>>> m
+[4, 8, 15, 16, 23, 48]
+>>> sum(m)
+114
+>>> min(m)
+4
+>>> max(m)
+48
+sum(m)/len(m)
+19.0
+>>> (sum(m))/(len(m))
+19.0
+
+LOGIC WITH IF STATEMENTS & IMPORTANCE OF INDENDATION
+#if/elif/else are used to apply logic. This plus loops in the essence of programming
+x=10
+if x>0:
+  print "x is positive:",x
+elif x<0:
+  print "x is negative:",x
+else:
+  print "x is 0:,x
+  
+LOOPS
+#iterate through lists or based on logic. Here we count up from 1 to 10
+>>> for n in range (1,11):
+...     print("n is",n)
+...     if n % 2 ==0:
+...             print("n is even")
+... 
+n is 1
+n is 2
+n is even
+n is 3
+n is 4
+n is even
+n is 5
+n is 6
+n is even
+n is 7
+n is 8
+n is even
+n is 9
+n is 10
+n is even
+
+>>> a = ['Mary','had','a','little','lamb']
+>>> for i in range(len(a)):
+...     print(i,a[i])
+... 
+0 Mary
+1 had
+2 a
+3 little
+4 lamb
+
+LOOPS CAN ALSO COUNT BACKWARDS
+>>> for n in range(10,-1,-1):
+...     print(n)
+... 
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+
+LOOPS OVER PLUS LISTS
+>>> for ticker in stocks:
+...     print(ticker)
+... 
+Symbol:NASDAQ=AAPL;Date:2015-10-01;Performance:Open=111.29,Close=109.56
+Symbol:NASDAQ=MSFT;Date:2015-10-01;Performance:Open=46.65,Close=46.53
+Symbol:NYSE=MMM;Date:2015-10-01;Performance:Open=149.0,Close=148.64
+>>> for ticker in stocks:
+...     parts = ticker.split(";")
+...     symbolset = parts[0].split(";")
+...     symbol = symbolset[1].split("=")
+...     print(symbol[1])
+... 
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+IndexError: list index out of range
+>>> for ticker in stocks:
+...     parts = ticker.split(";")
+...     symbolset = parts[0].split(":")
+...     symbol = symbolset[1].split("=")
+...     print(symbol[1])
+... 
+AAPL
+MSFT
+MMM
+
+ITERATE OVER A STRING
+#can use for loops on strings as well
+dna="AAGATCAGGAC"
+for c in dna:
+    print "DNA base is " + c
