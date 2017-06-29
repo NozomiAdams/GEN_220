@@ -1,1 +1,113 @@
+More Python Loops, Arrays, & Functions
+#useful to walk through your data and perform logic
+#testing operators
 
+a < b - test if something is less than
+a > b - test if something is greater than
+a >=b - test if something is greater than or equal
+a > b and b > b - combine logic using AND
+a > b or b > c - combine using OR
+not(a < b) - negate the result with NOT
+
+LOGIC SOME MORE
+>>> a=1
+>>> b=2
+>>> if a !=b:
+...     print("a not b")
+... else:
+...     print("a==b")
+... 
+a not b
+>>> if not (a !=b):
+...     print("a not b")
+... else:
+...     print("a==b")
+... 
+a==b
+
+FOR LOOPS
+#reminder of how to use for to iterate through items in a list or a string
+
+ dna="AAGATCAGGAC"
+>>> for c in dna:
+...     print("DNA base is" + c)
+... 
+DNA base isA
+DNA base isA
+DNA base isG
+DNA base isA
+DNA base isT
+DNA base isC
+DNA base isA
+DNA base isG
+DNA base isG
+DNA base isA
+DNA base isC
+
+>>> for c in range(len(dna)):
+...     print("DNA base is" + dna[c])
+... 
+DNA base isA
+DNA base isA
+DNA base isG
+DNA base isA
+DNA base isT
+DNA base isC
+DNA base isA
+DNA base isG
+DNA base isG
+DNA base isA
+DNA base isC
+
+>>> for n in lst:
+...     print("items is", n)
+... 
+items is 70
+items is 78
+items is 12
+
+LOOPS WITH WHILE
+#another way to loop is to use the while operator
+>>> i=0
+>>> while i < 10:
+...     print("i is", i)
+... 
+i is 0
+i is 0
+i is 0
+i is 0
+i is 0
+i is 0
+i is 0
+i is 0
+i is 0
+i is 0
+
+FUNCTIONS
+#function info: def to define the function, can use return to indicate the return from the routine
+
+# code to calculate the average
+def average(lst):
+"""This is the average function
+"""
+    sum = 0;
+    for n in lst:
+       sum += n
+    return sum / len(lst)
+print average([1,2,3,4,5,100])
+
+REGULAR EXPRESSIONS AND MATCHING
+>>> import re
+>>> m = re.search('(dog)','dogwood');
+>>> if m:
+...     print("contains dog")
+...     print(m.group(0))
+... 
+contains dog
+dog
+
+>>> m = re.search('(d[aoe]g)','dogwood');
+>>> if m:
+...     print(m.group(0))
+... 
+dog
