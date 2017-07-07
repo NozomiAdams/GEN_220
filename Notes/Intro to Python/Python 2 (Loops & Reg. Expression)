@@ -111,3 +111,52 @@ dog
 ...     print(m.group(0))
 ... 
 dog
+
+PROBLEMS
+1. Write code to test if there is a stopcodon in the following text
+AGAGACGAGAGTTACCGACGTAT
+2. Check to see if it is in frame?
+
+SEARCH & REPLACE
+#Using re.sub and re.subn can replace
+#subn() can replace the same as sub() but returns the updated string and count of number
+of changes instead of updating the string
+'''re.subn(_patter_,_replacement_,_string_,count_num_times_to_perform)
+#replace dog with cat
+
+>>> import re
+>>> str = "My dog likes to eat dogfood"
+>>> print(str)
+My dog likes to eat dogfood
+>>> str2 = re.sub("dog","cat",str)
+>>> print(str2)
+My cat likes to eat catfood
+>>> str3 = re.sub("cat","lion",str2,1)
+>>> print(str3)
+My lion likes to eat catfood
+>>> str4 = re.sub("cat","lion,str2,2)
+  File "<stdin>", line 1
+    str4 = re.sub("cat","lion,str2,2)
+                                    ^
+SyntaxError: EOL while scanning string literal
+>>> str4 = re.sub("cat","lion",str2,2)
+>>> print(str4)
+My lion likes to eat lionfood
+>>> str5 = re.sub("lion","cat",str4,2)
+>>> print(str5)
+My cat likes to eat catfood
+
+MORE ADVANCED REGEX USE
+#Regular expressions can be 'compiled' which will make them run faster an simply the use
+when you need to repeatedly search a patter. For example, to enumerate the locations of all 
+the sites that match
+
+import re
+motif = "\s+([Tt]he)\s+"
+message = "It was the darkest and stormiest of night. The candles were lit
+but the wind kept blowing them out. -OutTheDoor"
+the_pattern = re.compile(motif)
+m = the_pattern.search(message)
+while m:
+    print "matched ",m.group(1), " from ", m.start(1), " to ", m.end(1)
+    m = the_pattern.search(message,m.end()+1)
