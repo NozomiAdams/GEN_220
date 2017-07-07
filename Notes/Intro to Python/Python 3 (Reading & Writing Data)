@@ -1,1 +1,355 @@
+I/O, DIRECTORIES & FILES
+1. Input and Output from program
+2. Command line arguments
+3. Getting files from directories
+4. Reading and writing files
+5. A script summarize fastq files in one directory
 
+>>> str = raw_input("Enter your string:testing")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'raw_input' is not defined
+>>> print("Received input is: %s" %(str))
+Received input is: My dog likes to eat dogfood
+>>> num = 100
+>>> print("Received number is: %s" %(num))
+Received number is: 100
+
+Format string: 
+print("Art: %5,  Price per Unit: %8.2f" % (453, 59.058))
+% = string modulo operator
+
+FORMATED PRINTING OF STRING AND NUMBER
+$ cat print.txt
+Gene    Length  P-value
+Os01g00010      1205    0.01020200
+Os03g02020      3520    0.95292029
+Os05g10240      400     0.05299200
+$ cat print_formated.txt
+Gene        Length    P-value   
+Os01g00010  1205      0.01      
+Os03g02020  3520      0.95      
+Os04g10240  400       0.05
+
+print '%-12s%-10s%-10s' %('Gene', 'Length', 'P-value')
+print '%-12s%-10d%-10.2f' %('Os01g00010', 1205, 0.01020200)
+print '%-12s%-10d%-10.2f' %('Os03g02020', 3520, 0.95292029)
+print '%-12s%-10d%-10.2f' %('Os04g10240', 400, 0.05299200)
+
+%[flags][width][.precision]type
+
+FORMATED PRINTING OF INTEGER
+#!/usr/bin/python
+test = raw_input("Enter your input integer: ");
+test = test.rstrip()
+print "Received input is %5d: " %(int(test))
+print "Received input is %10d: " %(int(test))
+print "Received input is %-10d: " %(int(test))
+print "Received input is %010d: " %(int(test))
+
+$ python print.py
+Enter your input integer: 2000
+Received input is  2000: 
+Received input is       2000: 
+Received input is 2000      : 
+Received input is 0000002000:
+
+USE FORMAT FUNCTION TO FORMAT OUTPUT STRING
+print '%-12s%-10d%-10.2f' %('Os01g00010', 1205, 0.01020200)
+#Os01g00010  1205      0.01
+ = '{a:<12s}{b:<10d}{c:<10.2f}'.format(a='Os01g00010', b=1205, c=0.01020200)
+>>> print(x)
+Os01g00010  1205      0.01      
+>>> x = '{0:<12s}{1:<10d}{2:<10.2f}'.format('Os01g00010', 1205, 0.01020200)
+>>> print(x)
+Os01g00010  1205      0.01      
+
+Write a script to ask you one type of fruit and its price. Print the information to screen in one sentence.
+
+$ python fruit.py
+input fruit: apple
+input price: 2.567
+#The price of apple is 2.56 per pound.
+Write a script to help you calculate the price of fruits
+
+the script ask you input three information of fruits: fruit type, pounds, price per pound
+you can input as many fruit as you can, finally the script will give the amount of payment
+while True:
+    #do something here
+    if raw_input('Continue? Yes or No: ') == 'No':
+        break
+        
+fruit = raw_input('input fruit:')
+price = raw_input('input price:')
+print 'The price of %s is %5.2f' %(fruit, float(price))
+total = []
+while True:
+    fruit = raw_input('Enter fruit type: ')
+    pount = int(raw_input('how many pounts: '))
+    price = float(raw_input('price per pount: '))
+    total.append([fruit, pount, price])
+    if raw_input('Continue? Yes or No: ') == 'N':
+        break
+payment = 0
+for item in total:
+    payment += item[1]*price
+print 'Total payment: %5.1f' %(payment)
+
+PASSING PARAMETERS TO PROGRAM THROUGH COMMAND LINE
+#default values of command line parameters
+#!/usr/bin/python
+import sys
+print 'the value of sys.argv[0] is : %s' %(sys.argv[0])
+print 'the value of sys.argv[1] is : %s' %(sys.argv[1])
+$ python argv.py 5
+the value of sys.argv[0] is : argv.py
+the value of sys.argv[1] is : 5
+
+#!/usr/bin/python
+import os
+import glob
+import sys
+files = glob.glob('%s/*.txt' %(sys.argv[1]))
+for file_name in sorted(files):
+    print 'filename: %s' %(file_name)
+$ python read_dir.py ./
+filename: ./ofile.txt
+filename: ./print.txt
+filename: ./print_formated.txt
+filename: ./process_line.txt
+
+GETTING FILES FROM DIRECTORY, LISTDIR
+#!/usr/bin/python
+import os
+from fnmatch import fnmatch
+import sys
+files = os.listdir(sys.argv[1])
+for file_name in sorted(files):
+    if fnmatch(file_name, '*.txt'):
+        print 'filename: %s' %(file_name)
+$ python read_dir_ls.py ./
+filename: ofile.txt
+filename: print.txt
+filename: print_formated.txt
+filename: process_line.txt
+
+OPERATION OF FILE PATH
+$ echo "fasta" > test.fa
+$ python
+import os
+files = 'test.fa'
+files = os.path.abspath(files)
+files                     #workshop/Python/test.fa
+os.path.dirname(files)    #workshop/Python
+os.path.basename(files)   #test.fa
+os.path.split(files)      #('workshop/Python', 'test.fa')
+os.path.splitext(files)   #('workshop/Python/test', '.txt')
+
+OPERATION ON FILE
+import os
+import time
+files = 'test.fa'
+os.path.exists(files)     #ture, false
+os.path.isfile(files)     #ture, false
+os.path.islink(files)     #true, false
+os.path.getsize(files)    #70
+time.ctime(os.path.getmtime(files))   #'Sun Oct 11 19:50:14 2015'
+time.ctime(os.path.getctime(files))   #'Sun Oct 11 19:50:51 2015'
+os.rename(files, '%s.new_file' %(files))      
+os.remove('%s.new_file' %(files))
+
+Write a script to list specific type of files in folder and output file name and size.
+
+give the folder through command line agrument
+output file name and file size to screen
+$ python read_dir.py ./
+filename: ./ofile.txt; size: 59
+filename: ./print.txt; size: 100
+filename: ./print_formated.txt; size: 83
+filename: ./process_line.txt; size: 42
+
+#!/usr/bin/python
+import os
+import glob
+import sys
+try:
+    files = glob.glob('%s/*.txt' %(sys.argv[1]))
+except:
+    print 'no diretory specified, try python read_dir.py ../data/'
+    sys.exit()
+for file_name in sorted(files):
+    print 'filename: %s; size: %s' %(file_name, os.path.getsize(file_name))
+    
+FILE I/O: FILE OBJECT RETURNED BY OPEN FUNCTION
+File object = open (file_name [, access_mode] [, buffering])
+
+* access_mode
+  r: Opens a file for reading only
+  w: Opens a file for writing only
+  a: Opens a file for appending
+* buffering
+  0: unbuffered
+  1: line buffered
+  positive value: buffering of N bytes
+  nagetive value: system default
+infile  = open ('infilename.txt', 'r')
+#reading
+infile.close()
+with open ('infilename.txt', 'r') as infile
+#reading    
+outfile = open ('outfilename.txt', 'w')
+#writing
+outfile.close()
+
+READING FROM FILE
+$ python
+fh = open('print.txt', 'r')
+#read all lines from file
+fh.read()
+#read one line
+fh.seek(0)
+fh.readline()
+#read all lines
+fh.seek(0)
+fh.readlines()
+#loops
+fh.seek(0)
+for line in fh:
+    print line
+fh.close()
+
+READING AND WRITING FILE
+#!/usr/bin/python
+import os
+import sys
+try:
+    os.path.isfile(sys.argv[1])
+except:
+    print 'no file specified, try python read_file.py 1.fq'
+    sys.exit()
+filehd = open (sys.argv[1], 'r')
+for line in filehd:
+    line = line.rstrip()
+    print 'reading line: %s' %(line)
+filehd.close()
+ofile = open('file.out', 'w')
+with open (sys.argv[1], 'r') as filehd:
+    for line in filehd:
+        line = line.rstrip()
+        print >> ofile, 'writing line: %s' %(line)  
+ofile.close()
+
+PROCESSING LINES OF TXT FILES
+$ cat process_line.txt
+biology,100
+microbiology,20
+entomology,80
+#!/usr/bin/python
+import os
+import sys
+import re
+try:
+    os.path.isfile(sys.argv[1])
+except:
+    print 'no file specified, try python process_line.py process_line.txt'
+    sys.exit()
+with open (sys.argv[1], 'r') as filehd:
+    for line in filehd:
+        line = line.rstrip()
+        word = re.split(r',', line)
+        print 'the first word of line is: %s' %(word[0])
+$ python process_line.py process_line.txt
+biology
+microbiology
+entomology
+
+WORK WITH COMPRESSED FILES
+$ cat file.txt
+testing1 biology
+testing2 microbilogy
+testing3 entomology
+$ gzip file.txt
+$ zcat file.txt.gz
+testing1 biology
+testing2 microbilogy
+testing3 entomology
+$ gunzip file.txt.gz
+#!/usr/bin/python 
+import gzip
+with gzip.open('file.txt.gz', 'rb') as gfile:
+    with gzip.open('ofile.txt.gz', 'wb') as ofile:
+        for line in gfile:
+            line = line.rstrip()
+            print >> ofile, line
+            
+A REAL PROJECT TO SUMMARIZE NUMBER AND LENGTH OF READ IN FASTQ FILES
+project directory: workshop/python/data
+
+samples: workshop/python/data/sample1.fq, sample2,fq, sample3.fq
+
+reads from the fastq files were trimmed with length vary from 15-31 nt
+
+summarize the number of reads and average length in each sample
+
+@SRR504360.63 HWUSI-EAS502:2:1:2:1892 length=38
+ACATCGACCAGAAATTT
++SRR504360.63 HWUSI-EAS502:2:1:2:1892 length=38
+BC>BBB>BB>>A>BBA@
+@SRR504360.72 HWUSI-EAS502:2:1:3:1744 length=38
+GATAGGGTTTTGAACAAACGGCTA
++SRR504360.72 HWUSI-EAS502:2:1:3:1744 length=38
+BBB???@?BB>CBCCCBB@>@A:B
+
+DEMO
+mkdir data
+cd data
+wget https://github.com/JinfengChen/Workshop/raw/master/Python/data/sample1.fq.gz
+wget https://github.com/JinfengChen/Workshop/raw/master/Python/data/sample2.fq.gz
+wget https://github.com/JinfengChen/Workshop/raw/master/Python/data/sample3.fq.gz
+#!/usr/bin/python
+import os
+from fnmatch import fnmatch
+import sys
+import gzip
+def mean(read_len):
+    length_total = 0
+    for length_read in read_len:
+        length_total += length_read
+    length_mean  = float(length_total)/len(read_len)
+return length_mean
+$ python demo.py ./data
+$ cat demo.sum
+Sample                   #Reads    Average   
+./data/sample1.fq.gz     1000      19.84     
+./data/sample2.fq.gz     1000      19.26     
+./data/sample3.fq.gz     1000      19.07
+
+#!/usr/bin/python
+import os
+from fnmatch import fnmatch
+import sys
+import gzip
+from numpy import *
+def mean(read_len):
+    length_total = 0
+    for length_read in read_len:
+    length_total += length_read
+    length_mean  = float(length_total)/len(read_len)
+    return length_mean
+ofile = open('demo.sum', 'w')
+print >> ofile, '%-25s%-10s%-10s' %('Sample', '#Reads', 'Average')
+for file_name in sorted(files):
+file_name = '%s/%s' %(sys.argv[1], file_name)
+    if fnmatch(file_name, '*.fq.gz'):
+        read_num = 0
+        read_len = []
+        line_num = 0
+        with gzip.open (file_name, 'r') as fq_file:
+            for line in fq_file:
+            line = line.rstrip()
+            line_num += 1
+            if line_num%4 == 2:
+                read_len.append(len(line))
+                read_num += 1
+        print >> ofile, '%-25s%-10d%-10.2f' %(file_name, read_num, mean(read_len))
+ofile.close()
