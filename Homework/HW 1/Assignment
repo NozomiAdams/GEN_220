@@ -7,10 +7,19 @@ You can use the echo command to print out a message with the result if needed.
 1. Getting data: 
 - Use wget or curl to download the text file The Variation of Animals and Plants Under Domestication, Vol. I.
 originally downloaded from https://www.gutenberg.org/ebooks/24923
+
+Julias-MacBook:~ juliaadams$ URL="http://hyphaltip.github.io/GEN220_2015/data/pg24923.txt"
+Julias-MacBook:~ juliaadams$ curl -sI $URL | grep Content-Length
+Content-Length: 1178828
+Julias-MacBook:~ juliaadams$ curl -sI $URL | grep Content-Length | awk '{print $2}'
+1178828
 - How big is this file (in kilobytes)?
+#The Output is the size of the file in bytes, so the size in kilobytes is:
+1178.828
 
 2. Compressing and uncompressing
 - Compress the File pg24923.txt you downloaded with gzip, how big is it in kilobytes?
+
 - Uncompress it, then compress it with bzip2, how big is it in kilobytes?
 - Uncompress it again
 
