@@ -12,13 +12,21 @@ Julias-MacBook:~ juliaadams$ URL="http://hyphaltip.github.io/GEN220_2015/data/pg
 Julias-MacBook:~ juliaadams$ curl -sI $URL | grep Content-Length
 Content-Length: 1178828
 Julias-MacBook:~ juliaadams$ curl -sI $URL | grep Content-Length | awk '{print $2}'
-1178828
+
+Julias-MacBook:~ juliaadams$ curl http://hyphaltip.github.io/GEN220_2015/data/pg24923.txt
+Julias-MacBook:~ juliaadams$ du -h pg24923.txt.gz #report how big the file is
+396K	pg24923.txt.gz
 - How big is this file (in kilobytes)?
-#The Output is the size of the file in bytes, so the size in kilobytes is:
-1178.828
+396K
 
 2. Compressing and uncompressing
-- Compress the File pg24923.txt you downloaded with gzip, how big is it in kilobytes?
+- Compress the File pg24923.txt.gz you downloaded with gzip, how big is it in kilobytes?
+
+Julias-MacBook:~ juliaadams$ gzip -l pg24923.txt
+  compressed uncompressed  ratio uncompressed_name
+      403738      1178828  65.7% pg24923.txt
+#compressed it is 403738 bytes or:
+403.738 kilobytes
 
 - Uncompress it, then compress it with bzip2, how big is it in kilobytes?
 - Uncompress it again
