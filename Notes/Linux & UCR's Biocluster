@@ -215,6 +215,219 @@ echo '<h1>Hello!</h1>' > www-project/index.html
 3. Create shortcut/link for new web project in html directory 
 ln -s www-project ~/.html/
 
-  
-  
+Notes on 10/11/2017 Linux, scripting, and HPCC Cluster Intro by Charles Forsyth
+#how to use bash scripts to submit jobs to the cluster
+Why Linux? 
+It is stable, powerful, secure, free, great for parallelization, and distributions
+File structure: when you get onto the Linux cluster 
+jadam013@pigeon:~$ ls / #root of linux system
+bigdata  bin  bioinfo  boot  dev  etc  gpfs  home  lib  lib64  media  mnt  old  opt  proc  rhome  root  run  sbin  scratch  srv  sys  tmp  usr  var
+jadam013@pigeon:~$ 
+Other top level directories are places where configuration files and devices are stored 
+The File System is case sensitive 
+Path types: 
+Absolute path - full path from top to bottom (root to file you are dealing with)
+Relative path - relative to my currnet location
+
+File system 
+tree - list files and directories in a tree structure 
+jadam013@pigeon:~$ tree
+.
+|-- E3Q6S8.fa
+|-- bigdata -> /bigdata/stajichlab/jadam013
+|-- books
+|-- more_books
+|   `-- one.txt
+|-- one.txt
+|-- shared -> /bigdata/stajichlab/shared
+|-- three.txt
+`-- two.txt
+
+4 directories, 5 files
+
+jadam013@pigeon:~$ pwd
+/rhome/jadam013
+jadam013@pigeon:~$ ls
+E3Q6S8.fa  bigdata  books  more_books  one.txt  shared  three.txt  two.txt
+touch: makes an empty file
+mkdir - make a directory
+cd - change to directory
+cp - copy files from a directory to a directory
+mv - move files from a directory to a directory
+rm - remove a file
+rmdir - remove an empty directory 
+jadam013@pigeon:~$ ls -l
+total 0
+-rw-r--r-- 1 jadam013 stajichlab  345 Oct  4 15:19 E3Q6S8.fa
+lrwxrwxrwx 1 jadam013 stajichlab   28 Jul 26 08:53 bigdata -> /bigdata/stajichlab/jadam013
+drwxr-xr-x 2 jadam013 stajichlab 4096 Oct  4 14:55 books
+drwxr-xr-x 2 jadam013 stajichlab 4096 Oct 11 14:21 example_dir
+-rw-r--r-- 1 jadam013 stajichlab    0 Oct 11 14:21 example_file
+drwxr-xr-x 2 jadam013 stajichlab 4096 Oct  4 14:44 more_books
+-rw-r--r-- 1 jadam013 stajichlab    0 Oct  4 14:45 one.txt
+lrwxrwxrwx 1 jadam013 stajichlab   26 Jul 26 08:53 shared -> /bigdata/stajichlab/shared
+-rw-r--r-- 1 jadam013 stajichlab    0 Oct  4 14:43 three.txt
+-rw-r--r-- 1 jadam013 stajichlab    0 Oct  4 14:45 two.txt
+
+jadam013@pigeon:~$ ls -ld
+drwx------ 6 jadam013 stajichlab 4096 Oct 11 14:21 .
+
+jadam013@pigeon:~$ ls -la
+total 512
+drwx------   6 jadam013 stajichlab   4096 Oct 11 14:21 .
+drwxr-xr-x 864 root     root       262144 Oct 10 19:39 ..
+-rw-r--r--   1 jadam013 stajichlab    269 Oct 31  2016 .Rprofile
+-rw-------   1 jadam013 stajichlab    418 Oct 11 14:12 .Xauthority
+-rw-------   1 jadam013 stajichlab   1859 Oct  9 15:42 .bash_history
+-rw-r--r--   1 jadam013 stajichlab     92 Jul 11  2015 .bashrc
+-rw-r--r--   1 jadam013 stajichlab    677 Apr  8  2013 .profile
+-rw-r--r--   1 jadam013 stajichlab   4882 Oct 31  2016 .tmux.conf
+drwxr-xr-x  18 jadam013 stajichlab   4096 Nov  1  2016 .vim
+
+jadam013@pigeon:~$ ls -latr #lets you deal with what you dealth with recently 
+total 512
+-rw-r--r--   1 jadam013 stajichlab    677 Apr  8  2013 .profile
+-rw-r--r--   1 jadam013 stajichlab     92 Jul 11  2015 .bashrc
+-rw-r--r--   1 jadam013 stajichlab    269 Oct 31  2016 .Rprofile
+-rw-r--r--   1 jadam013 stajichlab  12104 Oct 31  2016 .vimrc
+-rw-r--r--   1 jadam013 stajichlab   4882 Oct 31  2016 .tmux.conf
+drwxr-xr-x  18 jadam013 stajichlab   4096 Nov  1  2016 .vim
+lrwxrwxrwx   1 jadam013 stajichlab     28 Jul 26 08:53 bigdata -> /bigdata/stajichlab/jadam013
+lrwxrwxrwx   1 jadam013 stajichlab     26 Jul 26 08:53 shared -> /bigdata/stajichlab/shared
+-rw-r--r--   1 jadam013 stajichlab      0 Oct  4 14:43 three.txt
+drwxr-xr-x   2 jadam013 stajichlab   4096 Oct  4 14:44 more_books
+-rw-r--r--   1 jadam013 stajichlab      0 Oct  4 14:45 one.txt
+-rw-r--r--   1 jadam013 stajichlab      0 Oct  4 14:45 two.txt
+drwxr-xr-x   2 jadam013 stajichlab   4096 Oct  4 14:55 books
+-rw-r--r--   1 jadam013 stajichlab    345 Oct  4 15:19 E3Q6S8.fa
+-rw-------   1 jadam013 stajichlab   1859 Oct  9 15:42 .bash_history
+drwxr-xr-x 864 root     root       262144 Oct 10 19:39 ..
+-rw-------   1 jadam013 stajichlab    418 Oct 11 14:12 .Xauthority
+drwxr-xr-x   2 jadam013 stajichlab   4096 Oct 11 14:21 example_dir
+-rw-r--r--   1 jadam013 stajichlab      0 Oct 11 14:21 example_file
+drwx------   6 jadam013 stajichlab   4096 Oct 11 14:21 .
+-rw-r--r--   1 jadam013 stajichlab  12104 Oct 31  2016 .vimrc
+-rw-r--r--   1 jadam013 stajichlab    345 Oct  4 15:19 E3Q6S8.fa
+lrwxrwxrwx   1 jadam013 stajichlab     28 Jul 26 08:53 bigdata -> /bigdata/stajichlab/jadam013
+drwxr-xr-x   2 jadam013 stajichlab   4096 Oct  4 14:55 books
+drwxr-xr-x   2 jadam013 stajichlab   4096 Oct 11 14:21 example_dir
+-rw-r--r--   1 jadam013 stajichlab      0 Oct 11 14:21 example_file
+drwxr-xr-x   2 jadam013 stajichlab   4096 Oct  4 14:44 more_books
+-rw-r--r--   1 jadam013 stajichlab      0 Oct  4 14:45 one.txt
+lrwxrwxrwx   1 jadam013 stajichlab     26 Jul 26 08:53 shared -> /bigdata/stajichlab/shared
+-rw-r--r--   1 jadam013 stajichlab      0 Oct  4 14:43 three.txt
+-rw-r--r--   1 jadam013 stajichlab      0 Oct  4 14:45 two.txt
  
+rwx: d is a directory, permissions that you have on the file: talks about people in group 
+and the last one is the outside world (other; done for hosting webpages) 
+
+Change directory permissions and change ownership of a file 
+chown username filename #changse username and filename
+chgrp groupname filename #changes the group association of a file
+chmod g+w filename #change the permissions of a file
+chmod o-r filename
+chmod u+x filename
+
+File transfers: 
+Download filezilla or cyberduck
+rsync can pick up where it left off 
+some files can take days to transfer
+scp filename you transfer username@host:/path/to/newfile
+scp username@host can swap and go remote to local
+TEXT FILES
+viewers: less #
+more #prints out first screen then stops
+cat #spits out the file 
+USEFUL TOOLS
+top #tells you what is going on in th esystem 
+#can sort by cpu utilization
+
+wget: installed on the cluster wget and url name
+wc -l filename #word count/line count
+grep is search this file with this pattern
+man and name of program #stands for manual
+FILESTREAMS
+can send commands other places 
+ls > list_of_files.txt
+Append STOUT to file 
+ls >> list_of_files.txt
+STDIN #counts lines in STDIN
+wc -l < list_of_files.txt
+STDERR: #save error messages to file
+ls -e 2> errors.txt #2 stands for this is the error file stream
+
+FILE STREAMS (cont.)
+Chaining commands: piping
+command 1 | command 2
+grep 'pattern' filename | wc -l
+command 1 | command 2 | command 3 (etc)
+cat filename.csv | cut -f 1 | sort | uniq
+SCRIPTING
+#the first line of most scripts are interpretive 
+python and bash are interpretive languages 
+#!/bin/bash # interprets what you put below in a script
+#can pass arguements to scripts 
+#path is a list of directories that the shell will look in when you type a command
+#test.sh 
+export PATH=~/bin:$PATH #~the homedirectory of the current user 
+SCRIPTING
+JUST A series of shell commands
+#!/bin/bash -1
+pwd 
+mkdir example_dir
+cd example_dir
+touch example_file
+cd ..
+mkdir example_dir2
+cd example_dir2
+touch example_file2
+cd ..
+ls - latr
+
+Scripting - args
+#!/bin/bash
+STRING="HELLO"
+echo $STRING $1
+
+multiplciation or arithmetic on variable you need to put let
+Scripting to create a tar.gz file
+$HOME is a special system or environment variable: variables that are set on the system level that you can call on with all your scripts
+Its the path to your home variables
+curly brackets references a vaiable
+
+QUEUING System
+
+SLURM - resource managment, job scheduler, load, balancing, parallel computing
+40 nodes under INTEL nodes
+Batch are older nodes (AMD not CPUs) can run for a week
+Highmem - min of 100 gigs of ram to use these
+48 hours is the max
+
+QUEUING System - job limits
+jadam013@owl:~$ slurm_limits.sh 
+===============
+Slurm Limits
+===============
+	      
+	Group Limits
+	---------------
+	     ALL		cpu=704,gres/gpu=8
+
+	User Limits
+	---------------
+	     batch              cpu=256,mem=1024G 
+	     debug              cpu=256,mem=1024G 
+	     intel              cpu=256,mem=1024G 
+	     short              cpu=256,mem=1024G 
+	   highmem               cpu=32,mem=1024G 
+Queuing system - submitting a job
+srun --pty bash -l
+srun: job 1200070 queued and waiting for resources
+
+srun is interactive
+sbatch - is running a bash script list of things you want to do and submit it to the cluster
+asks what resources we are asking for on the compute node
+
+Queuing system - submitting a job
+Queuing system - array jobs
+
