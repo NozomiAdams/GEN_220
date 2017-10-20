@@ -353,3 +353,47 @@ file_name = '%s/%s' %(sys.argv[1], file_name)
                 read_num += 1
         print >> ofile, '%-25s%-10d%-10.2f' %(file_name, read_num, mean(read_len))
 ofile.close()
+
+Notes on 10/20/2017 
+Python 3: data input and output
+The open function is used to open file handles. 
+cat file | python myscript.py
+#Can also be a file
+filehandle = open(myfile,"r")
+open a file for reading or writing back out to
+The function returns a file handle like a bookmark, which tells us where we are 
+file = "data1.dat"
+fh = open(file,"r")
+for line in fh:
+  print(line)
+#colin at the end everything indented is in the loop
+#Alternative structure for opening
+with open(myfile,"r") as fh:
+  for line in fh:
+      print(line)
+#this will throw a warning if the file cannot be opened
+#Writing data
+ofh = open("my_data.tab","w")
+ofh.write("Species\tHabitat\tSize\n") #write a line in the file 
+
+#Modules/Libraries/Packages
+#additional of modules sets of routines that can do things for you
+#sys are resources for system specific data
+#url allows of to talk to things from the web or the network
+
+#Reading in STDIN
+use sys module ot get access to stdin
+import sys
+
+counter = 0
+for line in sys.stdin:
+  counter += 1
+print ("There are", counter, "lines")
+
+#Data streams don't have to be files
+CSV module
+
+Command line arguments
+sys.argv is an array
+
+
