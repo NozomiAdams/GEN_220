@@ -160,3 +160,269 @@ m = the_pattern.search(message)
 while m:
     print "matched ",m.group(1), " from ", m.start(1), " to ", m.end(1)
     m = the_pattern.search(message,m.end()+1)
+
+Notes on 10/18/17
+Python 2: Logic, Loops, iterators by Sawyer Masonjones
+2.1: Logic 
+Used for decision-making and controlling program flow
+Centered around boolean if:then statements 
+Use if then statements, if this is true, then do this
+2.1 syntax of if/loop statements
+Python determines structure of if/else statements lookinf for the ":" and the code that follows needs to be indented
+2.1 Logical Expressions
+== return true if the values are the same
+!= will return true if values are different
+> or <
+2.2 Loops used to repeat actions
+for loops iterate over a range of some structure
+while loops repeat until some condition is met
+
+>>> for i in range(1,11):
+...     print(i)
+... 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+>>> list = [1,2,3,4,5,6]
+>>> for i in range(len(list)):
+...     print list[i]
+... 
+1
+2
+3
+4
+5
+6
+
+>>> for i in range(10,-1,-1): 
+...  print(i)
+... 
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+
+>>> for i in range(30,-1,-3):
+...     print(i)
+... 
+30
+27
+24
+21
+18
+15
+12
+9
+6
+3
+0
+
+can directly iterate over lists 
+>>> for item in list:
+...     print(item)
+... 
+1
+2
+3
+4
+5
+6
+
+>>> while i < 100:
+...     i += 1
+...     print(i)
+... 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+
+>>> for i in list:
+...     print(i)
+...     if i == 4:
+...             break
+... 
+1
+2
+3
+4
+
+>>> for i in list:
+...     if i % 2 == 0:
+...             print("I am even")
+...             continue
+...     print("I am odd")
+... 
+I am odd
+I am even
+I am odd
+I am even
+I am odd
+I am even
+
+2.4 Iterations over lists with for loop
+>>> iterator = iter(list)
+>>> next(iterator)
+1
+>>> next(iterator)
+2
+>>> next(iterator)
+3
+>>> next(iterator)
+4
+>>> next(iterator)
+5
+>>> next(iterator)
+6
+>>> iterator = iter(list)
+>>> for i in iterator:
+...     print(i)
+... 
+1
+2
+3
+4
+5
+6
+
+>>> iterator = iter(list)
+>>> while True:
+...     try:
+...             next(iterator)
+...     except StopIteration:
+...             break
+... 
+1
+2
+3
+4
+5
+6
+
+for loops iterate over a specific range
+
+for i in sequence:
+...     if i == 'G':
+...             print(i)
+...     if i == 'C':
+...             print(i)
+
+>>> count_gc = 0
+>>> for i in sequence:
+...     if i == 'G' or i == 'C':
+...             count_gc += 1
+... 
+>>> gcperc = count_gc/(len(sequence)) * 100
+>>> gcperc
+50.0
