@@ -1,3 +1,9 @@
+Write a program called print_triples.py. Print out all the numbers from 0 to 100 and print * next to the numbers which are 
+perfectly divisible by 3. 
+
+Do this by making a loop which counts up from 0...100
+Check the number to see if it is divisible perfectly by 3 (no remainder)
+Print a * next to the number if that is the case
 
 >>> for i in range(0,101):
 ...     if i % 3 == 0:
@@ -106,3 +112,6 @@
 98
 99 *
 100
+
+2. Write a replacement script for the unix tool word count wc. The program should print out the number of lines in an input file
+Store your code in the script wc.py. 
