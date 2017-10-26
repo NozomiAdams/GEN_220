@@ -190,3 +190,34 @@ for k,v in seqs.iteritems():
     print "id is ",k,"seq is",v
      n += 1
 print n,"sequences"
+
+Notes for 10/25/2017
+Python 4 - Dictionaries, Functions
+Lists and Array Reminders
+To create a list of items, use the [ ]
+genes = ['SOD1','CDC11','YFG1']
+print(genes)
+print(genes[1])
+print(genes[1:]) #everything after slot 1
+print(genes[:1])
+print(len(genes))
+
+range() gives you back a list of numbers based on some function
+map() allows you transform data from one form to another 
+
+Sorting lists
+genes sorted by names
+
+Dates and times:
+datetime import datetime
+
+Dictionaries
+There are a set of pairs of things: always a key and a value
+diane: 10 
+key is unique index into a dictionary
+keys are unique
+
+Functions: 
+blocks of code that we can call again and again
+
+
