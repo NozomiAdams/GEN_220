@@ -220,4 +220,18 @@ keys are unique
 Functions: 
 blocks of code that we can call again and again
 
+Regular Expressions: Pattern Matching 10.27.17
+Pattern matching: sometime we want to match not a single equality but a pattern. Mostly this is used for text processing
+import re to use regular expressions
+all things start with re in code for regular expressions
+re.search(PATTERN,QUERYSTRING)
+if RESULT:  
+  #WE HAD A MATCH
+else
+  #WE DID NOT HAVE A MATCH
+ use search pattern we are looking for a substring
+ + is 1 or more times
+ * is 0 or more times
+ question mark is 0 or 1 instances come before the text
+ 
 
