@@ -235,3 +235,78 @@ else
  question mark is 0 or 1 instances come before the text
  
 
+Regular Expressions: Pattern matching on 11.1.17
+du -h is disc usage and human readable
+homework 2: if num % 3 == 0:
+problem #3 
+process each line in a file an remove the trailing new line
+get the three columns that 
+split by tab
+codons = cols[0]
+string and split it on a comma
+add to it every time you see an amino acid
+keep track of how many unique amino acids you saw
+aa_fourfold += 1
+hw #3 use dictionaries to keep track of things
+use dictionaries and ability to ask for more than one thing from a string
+if he gives us a string with DNA and asked us to find all of the dinucleotides and adjacent sequences 
+walk through a sring and find the pairs 
+for loop (for character in string:
+  looks at every nucleotide in sequences 
+  #need 2 characters at a time; iterate through a base use the string option and get one base at a time
+  str[0] gives us back A 
+  str[0:2] gives us back AA going up to but not including position 2
+  for loop has to update the start and the stop and need a for loop for doing that
+  need an iterate that generates numbers from 0 to this 
+  #need to use range
+  m = str[0:2]
+  1. iterator walks through all the things in the sequence and it goes up by 1 
+  use len function to tcall len(str)
+  pass in two files and make 2 dictionaries and each dictionary you keep track of AA for seq file 1 and seq file 2
+  do a look up for AA in the dictionary for file 1 and file 2 (freq or percentage is ok)
+  
+  look at columns ability to use pattern searches
+  the number you are looking for are between these two numbers 
+  if number is greater than equal to this or less than equal to that 
+  use regular expressioni. turn into a number that you can do a computation on 
+  YP_008253351-YP_008253423
+  
+  Vince Buffalo's book has a section on git
+  Git tutorial can do an upload of the solution
+  running code on the cluster eventually
+  make a repostitory git init #first time to start something new
+  git add to add files you want to track 
+  done do a git commit " " describe what a check in was difference between 
+  keeps track on a version in your computer 
+  if you want to know what is different, then you can type git diff shows a difference file where lines and changes have been made
+  git push copies it up to the cloud 
+  git clone to check out the homework 
+  if you have it already checked out do a git pull
+  git add tells git to track that file
+  commit check in any file that has changed that you told it to track
+  git rm (to remove) removes it from being tracked 
+  make a repository so you have a version of what is running and add them to the repository
+  set up github repository and read me or text file with a project description
+  collaboratively writing a text file
+  
+  Python libraries: 
+  gzip, or bzip are tools for compressing data files
+  the amount of disc space for cheap 
+  wb data that is sending is binary and uses all the possible characters and bytes
+  import csv and tell the delimiter that its a tab and not a comma
+  other parsers deal with tab delimited data
+  data with bed format with bedtools that allow you to interact with the data
+  pybedtools: bed format is simple compact format
+  vince buffalo's book describes range queries 
+  where are indels across the genome and does the indel pattern if you are near a gene for not
+  what are the other features that are within 5 kb of this thing
+  with a range what are all the things that overlap in this range
+  
+  Biopython - set of examples in bioinformatics 
+  sequences are one of the main things we deal with 
+  import bio
+  how to write a fasta sequence parser 
+  fasta sequence file 
+  import SeqIO
+  how to get fasta file out effeciently to build a dictionary and print it out 
+  
