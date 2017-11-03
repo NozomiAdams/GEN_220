@@ -1,1 +1,77 @@
 
+#Notes for class on 11/3/17
+Introduction to BLAST
+do sequence searchers DNA to DNA searches 
+develop workflows to ask questions 
+BLAST is core for bioinformatics
+There are 2 files taken the predicted genes in the yeast genome and only grabbed genes from chromosome 1
+how would you read in a script from a fasta sequence file. How would you write a script of the subset
+look at orfs or DNA of protein coding regions
+Blast was designed to do fast sequence searchers
+NCBI is what is most familiar - supported by US national health 
+LUU blast is one method to use and AB-Blast is another
+2.7.1 was the version that was made last week
+can use module system to load up a particular tool or version of a tool
+module avail to know versions that are available on the biocluster 
+index the database you have a query sequence and search it against one or many sequence databases
+align sequence 1 to a whole bunch of databases
+To build index you run tool called makeblastdb
+once you made database you don't have to reindex it
+because it is a nuceltoide database you tell it a nuc
+you tell it the file you want to read in and the files have to be in the fasta format
+the id is followed by a space everything before 1st space is the ID 
+ncbi develop database files from their site and they have a prefix system
+gi|rm|gb|accu|locus
+nucelotide database and protein database
+module load ncbi-blast/2.7.1+
+makeblastdb
+makeblastdb -in file -dbtype nucl
+mkdir BLAST_demo
+cd BLAST_demo
+ls
+ln -s /bigdata/gen220/shared/data_files/sequences/yeast_chr1_orfs.fa
+ln -s /bigdata/gen220/shared/data_files/sequences/C_glabrata_orfs.fa
+#search these two against eachtoher build an index database against these but search C. glabrata ones
+do a blast search now just get one sequence out of the file now 
+more C.glabrata
+more yeast file 
+head -n 15  yeast_chr1_orfs.fa > YAL027E.cds
+blastn: take nucleotide sequence and search it against the database 
+blastn -query YAL027W.cds -db C_glabrata_orfs.fa
+use query file and database (db) option
+out is where to save the report 
+this particular sequence has no homologues
+to run the whole database file (whole set of 
+you don't really need to look at the alignment 
+want to count how many hits there are: what is the best or multiple hits
+can take a big text file and run a parser on it 
+we might want to get it as a tab delimited format 
+outfmt gives us format in tab delimited way 
+two flavors: one starts with comments and another does not
+use e-value format for scientific notation
+number of identical bases and the length of the alignment are shown
+total length of alignment includes the gaps that are included
+if you wanted to know number of bases in query sequence aligned 
+alignment starts at 196 and goes to 1786
+to figure out how many bases from our query seuence alignned it would be (1786 - 196)4416 (total length of query sequence)
+number of bases out of total bases aligned 
+tab delimited report 
+outfmt 6 to not get any of the comments 
+for this report we have 18 alignments: count 18 lines in the report 
+don't want to coutnt the same one twice 
+use awk or cut
+awk '{print $1}' yeast_chr1-vs-Cglabrata.BLASTN.nocomments.tab | uniq wc -l
+awk '{print $1}' yeast_chr1-vs-Cglabrata.BLASTN.nocomments.tab | uniq | wc -l
+6-frame translation 3-F and 3-R
+translate both query and database into 6 frame RNA
+max nubmer of target sequences: top 5 hits; don't need to see all thousand
+can tell it to give back the max number of target sequences 
+target seqeunce is name of sequence that is a hit 
+the output is sorted by the e value if we have two pieces that align in the database
+the better e-value comes first. The tool optimizes to give the best or most similar sequence
+Need to look at the start and the end of the query 
+BLAST: content of script to send 
+header tells single computer with 4 cpu (will run 4X as fast) 
+module load ncbi-blast/2.7.1+
+
+
