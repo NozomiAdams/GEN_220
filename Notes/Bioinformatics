@@ -74,4 +74,173 @@ BLAST: content of script to send
 header tells single computer with 4 cpu (will run 4X as fast) 
 module load ncbi-blast/2.7.1+
 
+Notes on 11/8/2017
+Bioinformatics 2 - Short reads, alignment, stats, SNPs
+Go over the homework 
+Write a script protein_freq.py which will read in a protein Fasta format file Saccharomyces_cerevisiae.peps.fa
+Print out the overall frequency (percentage) of each amino acid observed across all the sequences
+Order this output sorted by the frequency of the amino acid, so the most frequent appear first.
+Read in a file that was in fasta format and count every single amino acid 
+data structure is a dictionary to look up a particular amino acid 
+read in a sequence fasta file and get back an array of sequences
+seqs = read.fasta(protein_file)
+AAfreq = {}
+totalaa = 0
+#iterate on each sequence
+for seq in seqs:
+  #iterate on each base/amino acid in the sequence
+  for aa in seq:
+    totalaa += 1 #count the total number of aa seen
+    if aa in AAfreq: #if this is not the 1st time we see this
+      AAfreq[aa] += 1
+    else: # if this is not 1st time seeing this aa, set the count to 1
+      AAfreq[aa] += 1
+      
+for character in sequence string
+have more than one sequence to process (adding a layer)
+add every time we see any baes 
+what is the % of methianines and cytosines in the data file
+we need to check and see if we have already seen this amino acid beofore
+dictionary we want to iterate through the 
+is this particular character in this dictionary if it is then add one the value stored already 
+if it is not then set the value to 1 because we haven't seen it before
+
+Header = ["Amino Acid","Proteome Percentage"]
+print("\t".join(Header))
+#your code for the report
+for aa in AAfreq
+counting something up that is unique
+have a dictionary that you add something to each time you see it 
+protein_freq.py
+{} initializes a dictionary  
+use square brackets to tell it 
+set the value m = 1
+reverse is how to get data back out 
+print("%s\t%.2f %%"%(aa,100 * AAfreq[aa]/ totalaa))
+print("%s\t%d %%"%(aa,100 * AAfreq[aa]/ totalaa))
+
+homework #2: look at the dinucleotide frequencies look at 2 bases at a time instead of a single one
+use this to compare the tables for 2 files
+read in the sequences file and get back an array of sequences
+2 files that are genomes in fasta formats 
+initialize 2 dictionaries to store data in it
+read in sequence file and get back an array (2 sequence files)
+and then loop through the sequences
+sequence list from seq file 1 and iterate through all strings 
+iterate through a set of numbers which tell you where you want to 
+go up to the last base in the sequence and do up to -1
+go through and read off AA, AC, TA, start at base 0 and go up to TA not 
+you want the iterator to go from number 0 all the way up to 4 but not including 5 and the length will be 5
+In the loop you can print out what is the sequence we got and what is the position in the string
+add this code and run this 
+
+homework problem #3
+Take a report and write a filtering code to take the BLAST output based on what you want to look out
+print out lines in report where the accessio nnumber of subject falls into some range
+where percent identity is >=25% 
+you have a report file and use the open statment to open the file up 
+open the file and process each line in the file and get rid of the new line in the end
+line.strip() take the data file and all data are tab dellimited use split commadn to get back an array
+csv library in python 
+split the line by tabs and then you get back a row that is an array and every item in the array
+look at the files that are delimited by something. 
+Tell that is is a tab delimited file and split it on the tabs
+query, subject, and % identity column two genes from 2 diffeernt bacterial species 
+e-value for alignment is 0: highly unlikely that alinnment is there by chance
+we are trying to process this file: find rows in datafile where hits only come from a certain range of accesions
+convert string into number and check to see if value is greater than a certain number
+we say the subject accession number is a particular column in the datafile
+print rows that print a particular accession number 
+1 method is to split on a particular underscore
+also get rid of the trailing dot  
+regular expressions and run as a match and run YP_ and give it a string t
+if it finds a match then we use the group option : the 1st set of parantehses gets stored in group 1
+for the whole thing that matched that would be group 0
+it prints out group 0 and group 1
+python still thinks it a string but ints a number int allows us to treat it like a number
+now that we have the number we can update the variable we have 
+is the number bigger than the limit that we set here and is is less than this one
+does it fall between this range of numbers 
+we only print out accessions that fit into that strategy
+we check and see if it falls between those values 
+do we have something where the %identity is > 25 
+you can convert it to an integer or covnert it to a float or else the 1e-10 doesn't work
+we can check the numbers and add an additional column 
+how long was the query alignment 
+the very first base in the alignment is 0
+blast tells us the alignment goes from 1-3 the length of taht alignment shoudl be 3
+have to add 1 to that to get it to be equal to the alignment 
+0-3 ATC have to add 1 if you want to figure out how long something is
+to get the length you have to add 1 to it
+subtract them from eachother and add 1
+data in column delimited format and manipuate it and process it in some way and print out subsets of this data
+m.group(0) is always the whole thing that matches what the pattern is
+m.group(1) is only the things in the 1st parantheses that do match
+matching forces us to start the match in the string and everything contained within match goes in group 0
+group 1 and then group 2 matches the 1st number that came out of the accession this is 0 
+this gives you the capture of the pattern
+group(0) if match is subset of the larger string then group 0 will not contain it 
+import re match = re.match("ABCD(EFG)")
+if we print out group 0 it gives the whole thing that matches that 
+match at least any of the numbers A-H and print that out 
+/d matches any set of any number
+just turns the string the accession number as a prefix trying to get rid of the bit 
+ask the pattern things that has numbers 
+matches YP_
+you are storing the value and testing for math part we have to go and get important stuff in the accession number
+take the string and recognize that part of the string has the nubmers you want to use
+regular expressions (\d+) gives flexible
+file handle (fh)
+line is a string
+call string functions on it with line.string and line.split manipulate the array
+take a string turn it into array and do things with it. 
+
+Align short-read data genomic sequencing or indel detection
+pipelines: start build up pipelines for analysis
+write code to restart something when it fails
+have multiple steps to do something step 2 depends on step 1 and want to rerun something 
+FastQ format starts with @
+FASTA format starts with >
+line describes the quality of every single thing in this sequence 
+qaulity score is a representation between 0 and 40 if you wanted each single charcter to represent something
+fastq format table that encodes the data 
+the idea is that every letter encodes a number and is offset from some scoring system so h is going to be a quality score of 7
+offset of some starting position. single base pair quality score represent the quality of the sequence
+the sequence files have inherent infomration in them
+information in big long header line represents where and position on the flow cell as to where rows and columsn and seq. are from
+we have paired-end data that we have sequence that are inherently paired so they reprensent some physical peice of DNA and they are paired 
+up if you have 2 seuqnece pairs (some distance apart) something is dfiferent in some expectation that they should be near eachother
+if you have a sequence read with a forward and reverse read and figure out where they align in the genome
+something extra in the DNA transposable element? we sequence some DNA and there are pairs of sequences that are attracted together
+short read aligners: can't use BLAST to align short reads 
+other tools that can do alignments much faster: burrows wheeler's transform
+we use the aligners to jump into it 
+run indexing step with bwa on the genome 
+bwa index and the file you want to run it on
+take reads that you develop and run an alignment of those 
+the files are compressed and if you want to look at them you can use zmore
+there is a sequence id and quality scores 
+can give it files that are compressed or uncompressed
+takes 100,000 sequence reads tries to guess the insert size baased on how far apart pairs are in the genome
+tells you that there is some average distance 
+does chunks of sequences at a time: tells you to run stuff with multiple processors 
+redirect output to yeast.sam and if you open up the file gives info on header info all sequences on genome file
+tells you the name of the sequence and how long it is 
+gives info about the alignment the @ signs tells you what is in the data file
+self documenting run bwa and tells you version of bwa and commands 
+tells you information about which sequence was aligned
+the same number is comeing up twice gave it a forward and reverse file 
+data from forward and reverse read file and they come up as paired 
+you see the starting position of each of them and tells you how far away the pair is 
+tells you what the insert size is 
+run a tool where we can call the SNPs out of the file
+bam is like sam file but its a binary version and its smaller in size because its compressed
+converted it to a sorted file and run a couple of steps to convert it to another format called cram
+There is a position and chromosome number 20 and tells you the SNP in the population that is being compared
+EMBL accession number and pulls up the record
+can download the EMBL file (fastq) format 
+
+
+
+
 
