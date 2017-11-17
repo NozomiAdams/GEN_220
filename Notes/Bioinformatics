@@ -311,5 +311,12 @@ run a tool called HISAT2
 and do alignments of reads to the genome
 
 
+With a random subet we want to randomly sample a subset of it
+write a quick parser to read the file in and just use one step
+with 600,000 we will subsample it and assume that a random subsample of this (10,000) could be representative of the data
+or we could do bootstrapping. write a bootstrap and take an alignment multiple alignment and every column is a particular character
+want to take certain columns and make a new alignment
+column wise random subsample we have a table and want to get a random set of lines from the table
+SNP calling just randomly select some lines of the file to make a smaller version of the file
 
 
