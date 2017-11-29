@@ -77,3 +77,46 @@ or we could do bootstrapping. write a bootstrap and take an alignment multiple a
 want to take certain columns and make a new alignment
 column wise random subsample we have a table and want to get a random set of lines from the table
 SNP calling just randomly select some lines of the file to make a smaller version of the file
+
+11/17/2017 
+tools to build indexes and retrieving them 
+cdbfasta module to run the protein database
+the fastq format expects a sequence name and string and format 
+To retrieve this information you use tool called cdbyank reads.fastq.cidx (index file) 
+pass the information to standard in 
+cat file of ids and that can get passed into cdbfasta 
+index and you have a tool to retreive from index and tell it what things you want 
+each line is the name of a sequence id that you want
+look at the lines that start with > sign these are names of sequences
+if you want to get 1 or 2 sequences out of database file
+a file in it there are 2 lines: 2 names of sequences that are sequences in the file
+cdbfasta on the tool 
+cat seq_I_want.txt 
+build a name and figure out what the sequence is for the particular name
+tell it that the @ sign distinguishes between 
+cdbfasta fasta format or fastq to retrieve sequences based on names 
+run a blast search get back sequences that hit: multiple align them 
+print out how long sequences are and distribution of sequence sizes
+biopython tools to read in sequences 
+#!/usr/bin/env python3
+import sys
+from Bio import SeqIO
+from Bio.Seq import Seq
+# seqfile
+if len(sys.argv) != 2:
+     print("argument should be\n","sequence_length.py FILE.fasta")
+     exit()
+filename = sys.argv[1]
+print("%s\t%s"%("Name","Length")) #csv module to print out data 
+for seq_record in SeqIO.parse( filename , "fasta"):  #this is biopython code this is an iterator SeqIO is name of the module
+    print("%s\t%d"%(seq_record.id,len(seq_record)))  #call a for loop and get back a sequence record print out seq name and length
+    
+    Generate table of sequence sizes
+    take an output and redirect to a file 
+    annotations from C.elegans genome of all the transposon sequences from the genome
+    then you uncompress files before processing and then
+    save the output into 2 different files transposons.lengths and mRNA.lengths
+    
+    
+    
+    
