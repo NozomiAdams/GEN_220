@@ -1,1 +1,59 @@
+Bioinformatics 4 - Comparative genomics, Finding Orthologs and Paralogues
+Are same genes in 2 or 3 different species
+repeats and transposable elements 
+if genes are there, ask where are the genes in the genome and are the genes in the same place?
+dot plot: 2 genomes or chromosomes x scale species A and Y axis is species B
+This 12 base sequence, where is the sequence like this in the other species
+Does that sequence exist in the chromosome of species B if there is you put a dot there
+everyone of 12 base pair overlapping is unique. Species b is identical to species a
+take the whole chromosome and flip it over
+need assembly of the genome
+gene content could be the same but differences in the organization 
+
+Repeat content:
+RepeatMasker it is a library of known sequneces that are repetetive of transposable elements. it is a blast of TEs
+not a model system: build a library of TEs genome against itself and identifies regions with high copy numbers
+RepeatModler script to run with SBATCH
+each sequence can be a distinct repetitive element
+developing a library of known repeats and then take the library of repeats. 
+Tells you where there are repeats search against known repeats at the protein level
+ID by similarity RepeatMaster breaks down the number of repeats that you found
+could use all as the search to ID if genome contains any of the repeat elements
+summary table about the particular genome
+genome annotation you want to mask out the repeats. could not be a protein coding gene, but transposons
+Orthologs and Paralogs
+ID genes that are shared between different species 
+if you want to know the alpha copies from all the other species orthologs: genes identical by descent
+paralogs: duplicates within a species 
+Are there genes specific to something; we know how to use blast to find things that are similar
+phylogenetic trees start with genome and classify what orthologous groups thy fit into
+e-value: what is what is likelood of finding this hit by chance
+gene loss/duplication/ events using NOTONG
+bidirectional or recipricol blast
+write code to do this
+
+single linkage: a link between cluster A and B they automatically go into the same cluster
+you want to know the things that are multi-copied
+single linkage is a statistical approach: linkage between 2 things: e-value cutoff for proteins the 2 things are linked
+with OTUs is it transitive? 
+single linkage can be useful for certain approaches
+Issues
+cases of loss: how do you identify the things that are found across multiple species 
+take best recipricols and linke they together with single linkage
+OrthoMCL - requires SQL database
+Orthogogue - don't need to have a database
+what sequence came from what species; when running analysis with all pairwise analyses
+all contained in 1 file, we need a way to figure out what species each came from
+look up table or change name of sequences so that they start with a prefix
+rename sequence file so that it has a prefix for that species and gene name, accession name
+you want to have some way to have a prefix
+concatente all of them into one protein file and index the database and search the databae against itself
+this generates a big blast table and then run tool called orthogogue and give it an input file
+-e 6 is the evalue power this generates an input file to a program called mcl, which does aspects of clustering
+imagine all proteins from all species laid down in a 2D graph: you have a single copy orthology that are similar
+distance are small if they are really similar. single copy protein all woul be next to eachother 
+how consistent is that group? 
+
+
+
 
